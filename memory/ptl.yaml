@@ -1,22 +1,13 @@
 meta:
   version: 1
-  last_modified: null
+  last_modified: "2026-03-09T00:00:00Z"
   item_count: 0
   tiers:
-    1: "This Week"
-    2: "Active"
-    3: "Backlog"
-    4: "Someday"
-  statuses: [READY, ACTIVE, BLOCKED, REVIEW, TODO, DONE, DROPPED]
+    1: "Urgent / Close Now"
+    2: "Active Projects"
+    3: "Queued"
+    4: "Infrastructure"
+    5: "Someday"
+  statuses: [READY, ACTIVE, BLOCKED, REVIEW, NEEDS_PLAN, TODO, DONE, DROPPED]
 
 items: []
-  # Example:
-  # - id: PTL-001
-  #   title: "Set up CI pipeline"
-  #   tier: 1
-  #   status: READY
-  #   owner: you
-  #   blocked_by: null
-  #   created: 2026-03-05
-  #   touched: 2026-03-05
-  #   note: "GitHub Actions, run tests on push"

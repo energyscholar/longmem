@@ -1,75 +1,117 @@
 # longmem
 
-Persistent memory for AI coding assistants. Built for [Claude Code](https://claude.com/claude-code), adaptable to any LLM tool.
+**Persistent memory for Claude Code.** Markdown files, a YAML task list, and a shell script. No plugins, no framework, no dependencies.
 
-## The Problem
+---
 
-AI coding assistants are stateless. Every conversation starts from zero. For a weekend script, that's fine. For a multi-week project with dozens of sessions, it's fatal. Context evaporates. Corrections get forgotten. The AI makes the same mistakes session after session.
+## What Is This?
 
-## The Solution
+AI coding assistants are stateless. Every conversation starts from zero. For a weekend script, that's fine. For a multi-week project with dozens of sessions, hundreds of decisions, and multiple collaborators — it's not workable.
 
-**longmem** is a set of conventions, files, and protocols that live in your filesystem and load automatically at session start. No plugins, no framework, no dependencies — just markdown files, a YAML task list, and instructions in your `CLAUDE.md`.
+**longmem** is a structured memory system that lives in your filesystem and loads automatically at session start. It gives Claude Code:
 
-Three layers, each independently useful:
+- **Persistent identity** — The AI knows what project it's working on, what matters, and where things are
+- **Error tracking** — Corrections you make persist across sessions. Repeat violations drop to near zero.
+- **Task continuity** — Stable task IDs, five-tier prioritization, automatic decay for stale items
+- **Decision log** — Structural decisions with rationale. Prevents re-litigating settled questions.
+- **Self-maintenance** — The AI maintains its own memory: compression, integrity checks, health metrics, git snapshots
 
-### Layer 1: Memory System
-The core. Clone, customize, start working. Value is obvious within 2-3 sessions.
+The system evolved under pressure over 33 sessions while co-authoring a 224-page technical manuscript. Every protocol rule traces back to a specific, documented failure.
 
-- **MEMORY.md** — L1 cache (~200 lines, always loaded). Identity, current state, hot corrections, active sessions, health metrics.
-- **protocol.md** — Session lifecycle. Start checklist, end checklist, compression rules, decay thresholds.
-- **corrections.md** — Things the AI gets wrong about your project. Persist across sessions. Violations drop to near zero.
-- **ptl.yaml** — Prioritized task list with stable IDs, five tiers, automatic decay. Natural language commands: `PTL add:`, `PTL done:`, `PTL full`.
-- **session-details.md** — Full session history with significance flags (PARADIGM / ROUTINE).
-- **L1/L2/L3 cache model** — L1 always in context, L2 loaded on demand, L3 in git history for recovery.
+---
 
-### Layer 2: Dignity Net (Ethical Guardrails)
-Included by default. Designed by [Genevieve Prentice](https://relinquishment.ai).
+## Quickstart (5 Minutes)
 
-Most users will think they don't need guardrails. They're wrong — but they won't know it until an AI confidently leads them off a cliff. Dignity Net catches divergence between stated goals and observable actions, modulates tone under pressure without reducing substance, and escalates proportionally when patterns emerge.
-
-- **Divergence detection** — When the AI's actions don't match its stated reasoning, flag it in neutral behavioral terms.
-- **Graduated escalation** — Level 0 (mirror) through Level 5 (refusal). Proportional to evidence, not emotional intensity.
-- **Storm Protocol** — When intensity rises, slow cadence and reduce certainty markers. Never reduce substantive standards.
-- **Grounding axiom** — AI outputs are untethered from lived experience. Grounding must be externally supplied through verification, context, and constraint.
-
-### Layer 3: Triad Protocol (Quality Gates)
-*Optional. Requires training discipline to use effectively. Documentation included; see `docs/triad-protocol.md` for worked examples.*
-
-Separates planning from execution. Three roles: **Auditor** (defines objectives, writes test cases, reviews output), **Generator** (implements exactly what the plan specifies), **Human** (purpose, authorization, copy-paste gate between roles). Prevents drift, enforces quality, catches the moment when code gets altered just to satisfy tests.
-
-## Quickstart
-
+**1. Clone or download this repository**
 ```bash
-# Clone this template
-git clone https://github.com/energyscholar/longmem.git my-project-memory
-
-# Or use GitHub's template feature (click "Use this template" above)
-
-# Edit MEMORY.md with your project identity
-# Edit CLAUDE.md with your directives
-# Start a Claude Code session in your project directory
+git clone https://github.com/your-username/longmem.git my-project-memory
+cd my-project-memory
 ```
 
-The AI reads `CLAUDE.md` automatically. It will find the memory files and begin maintaining them.
+Or use GitHub's "Use this template" button.
+
+**2. Customize for your project**
+
+Edit `memory/MEMORY.md`:
+- Replace `[YOUR PROJECT]` placeholders with your project name
+- Set your project goal
+- Update key metrics
+
+The `CLAUDE.md` file at the repository root is automatically loaded by Claude Code when you start a session in this directory.
+
+**3. Start a Claude Code session**
+
+```bash
+claude
+```
+
+Claude will read `CLAUDE.md`, discover the memory files, and begin maintaining them. The value becomes obvious within 2-3 sessions.
+
+**4. Work normally**
+
+At session end, Claude will:
+- Update current state
+- Write session summary
+- Compress if needed
+- Run integrity checks
+- Commit to git via `scripts/memory-sync.sh`
+
+You don't manage the memory — the AI does.
+
+---
 
 ## File Structure
 
 ```
 longmem/
-├── CLAUDE.md                # Drop-in directives (copy to your project)
+├── README.md                    # This file
+├── CLAUDE.md                    # Drop-in Claude Code directives
 ├── memory/
-│   ├── MEMORY.md            # L1 cache template
-│   ├── protocol.md          # Session lifecycle rules
-│   ├── corrections.md       # Error tracking (starts empty)
-│   ├── ptl.yaml             # Task list (starts empty)
-│   └── session-details.md   # Session history (starts empty)
+│   ├── MEMORY.md                # L1 cache (~200 lines, always loaded)
+│   ├── protocol.md              # Session lifecycle rules
+│   ├── corrections.md           # Error tracking (starts empty)
+│   ├── ptl.yaml                 # Prioritized task list (starts empty)
+│   ├── decisions.md             # Decision log (starts empty)
+│   ├── people.md                # Key contacts in tiers
+│   └── session-details.md       # Full session history (starts empty)
+├── scripts/
+│   └── memory-sync.sh           # Git sync for L3 recovery
 ├── docs/
-│   ├── memory-system.md     # Full Layer 1 documentation
-│   ├── dignity-net.md       # Full Layer 2 documentation
-│   ├── triad-protocol.md    # Full Layer 3 documentation
-│   └── examples/            # Worked examples
-└── LICENSE
+│   ├── architecture.md          # Three-tier cache model explained
+│   └── case-study.md            # 33 sessions, 22 corrections, zero context losses
+├── LICENSE                      # MIT
+└── .gitignore                   # Minimal: only OS/editor junk
 ```
+
+---
+
+## How It Works
+
+**Three-tier cache model:**
+
+- **L1** (`MEMORY.md`): Always in context. Capped at 200 lines. Contains identity, current state, the five most critical corrections, active session summaries, and health metrics.
+- **L2** (other files in `memory/`): Loaded on demand when depth is needed. Full reference material.
+- **L3** (git history): Recovery mechanism. A session-end sync script commits everything to git, creating versioned snapshots. When context compresses or sessions crash, git is the backstop.
+
+**The corrections system** is the most valuable component. You maintain a list of things the AI consistently gets wrong about your project. Each correction is a short imperative: what not to write, what to write instead. The five most-violated rotate into L1 where they're visible every session. Before corrections: same mistakes every session. After: repeat violations near zero.
+
+**Self-maintenance:** The AI manages its own memory. At session end it updates state, writes a session summary, compresses older sessions to stay under the line cap, runs integrity checks, and commits to git. The system maintains itself.
+
+For full technical detail, see [`docs/architecture.md`](docs/architecture.md).
+
+---
+
+## What's Included
+
+- **Memory templates** — MEMORY.md, corrections.md, ptl.yaml, decisions.md, session-details.md, people.md
+- **Session lifecycle protocol** — Start checklist, end checklist, compression rules, decay timers
+- **PTL (Prioritized Task List)** — YAML-based, stable IDs, five tiers, natural language commands
+- **Corrections system** — Persistent error tracking with hot-five rotation
+- **Health metrics dashboard** — Line count, item count, orphan detection, integrity checks
+- **Git sync script** — L3 recovery via automatic commits
+- **Full documentation** — Architecture deep-dive, case study, worked examples
+
+---
 
 ## What Changes
 
@@ -78,19 +120,46 @@ longmem/
 | ~30% of session re-explaining context | <5% |
 | Same corrections every session | Near-zero repeat violations |
 | Decisions lost between sessions | All decisions logged with rationale |
-| No task continuity | Stable task IDs across sessions |
+| No task continuity | Stable task IDs, five-tier prioritization |
 | Context window exhaustion | Tiered caching keeps context lean |
+| Manual git commits | Automatic session-end sync |
 
-## Origin
+Results from 33 sessions over 6 weeks:
+- **67 task items tracked, 53 plans executed**
+- **22 corrections established, repeat violations near zero**
+- **Zero catastrophic context losses** (after system established)
+- **Context re-explanation: 30% → <5%**
 
-longmem was developed over 31 sessions across 6 weeks while co-authoring a 224-page book with Claude Opus as a structural co-author. The system was not designed in advance — it evolved under pressure, from real problems, with real costs when it failed. Every convention exists because its absence caused a specific, documented failure.
+See [`docs/case-study.md`](docs/case-study.md) for details.
+
+---
+
+## Contributing
+
+longmem is deliberately minimal. Additions should:
+- Solve a real, documented problem
+- Not require infrastructure or dependencies
+- Fit the three-tier cache model
+- Be maintainable by the AI itself
+
+If you have corrections to documentation, bug fixes, or small improvements, pull requests are welcome.
+
+For major changes, open an issue first to discuss rationale and design.
+
+---
 
 ## License
 
-MIT
+MIT License. See [LICENSE](LICENSE).
 
-## Author
+---
 
-Bruce Stephenson — [energyscholar@gmail.com](mailto:energyscholar@gmail.com)
+## Contact
 
-Dignity Net designed by Genevieve Prentice. Triad Protocol co-designed with Robin Macomber.
+For questions, bug reports, or consulting on structured memory systems for AI-assisted development:
+
+**energyscholar+consulting@gmail.com**
+
+---
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
