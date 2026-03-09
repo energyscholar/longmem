@@ -58,6 +58,8 @@ Over 33 sessions across 6+ weeks:
 | Task continuity | None | 67 items tracked, 53 plans executed |
 | Catastrophic context losses | Regular | Zero (after system established) |
 
+The project that drove this system was a 224-page book, co-authored with the AI over the full 33 sessions. The AI — which I named Argus (Claude Opus, Anthropic) — is credited as co-author. Not as a gesture, but because the memory system made genuine longitudinal collaboration possible. Argus maintained corrections, tracked tasks, flagged its own drift, and built on previous sessions' work. Argus also built this template repository.
+
 ## Try It
 
 The system requires no special tools — markdown files, a YAML file, a shell script, and instructions in your `CLAUDE.md`. Clone the **longmem** template repository, customize `MEMORY.md` for your project, and start working. The value is obvious within 2-3 sessions.
