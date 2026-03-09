@@ -101,6 +101,28 @@ For full technical detail, see [`docs/architecture.md`](docs/architecture.md).
 
 ---
 
+## Talking to Your AI
+
+Once longmem is set up, these commands work in any session:
+
+**Tasks:**
+- `PTL` — Show your prioritized task list
+- `PTL add: fix the auth bug` — Add a task (Claude will ask for tier/priority)
+- `PTL close PTL-003` — Mark a task done
+
+**Corrections:**
+- "You keep calling it a REST API — it's GraphQL. Add a correction." → Claude adds it to `corrections.md` and starts enforcing it
+- "That correction is outdated, remove it." → Claude updates the file
+
+**People:**
+- "Remember that Sarah is my tech lead, prefers Slack over email." → Claude adds to `people.md`
+
+**Memory management:**
+- "What's in your memory?" → Claude summarizes what it knows
+- "Sync memory" → Runs `memory-sync.sh` (also happens automatically at session end)
+
+---
+
 ## What's Included
 
 - **Memory templates** — MEMORY.md, corrections.md, ptl.yaml, decisions.md, session-details.md, people.md
