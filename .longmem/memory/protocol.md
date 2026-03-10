@@ -51,23 +51,9 @@ When MEMORY.md ≥180 lines:
 6. Update Health Metrics line count
 7. Verify MEMORY.md is now <180 lines before proceeding
 
-**session-details.md compression:**
-- If session-details.md >200 lines: compress oldest ROUTINE blocks to 2-line entries
-- PARADIGM sessions: keep full detail indefinitely
-- Archive sessions >6 months old to separate file if needed
+**Never compress:** Identity, Current State, L1 Corrections, Health Metrics, File Map.
 
-**Never compress:**
-- Identity section
-- Current State
-- L1 Corrections
-- Health Metrics
-- File Map
-
-**Content overflow (any section, any file):**
-- When a MEMORY.md section exceeds ~20 lines: create a dedicated L2 file (e.g., `.longmem/memory/architecture.md`), add to File Map, replace section with 1-line pointer.
-- When an L2 file exceeds 300 lines: archive oldest content to git only (L3). Recoverable via `git log -p -- .longmem/memory/[file]`.
-- When index.md exceeds 150 lines: compress by archiving per-session entries to git, keeping only topological navigation and one-line file summaries.
-- Pattern is always: move content → leave pointer → update File Map.
+**Overflow:** Section >20 lines → extract to L2 file, leave pointer. L2 file >300 lines → archive to git (L3). Index >150 lines → compress to navigation only. Always: move content → leave pointer → update File Map.
 
 ---
 
@@ -75,26 +61,17 @@ When MEMORY.md ≥180 lines:
 
 **Run these steps at the end of EVERY session:**
 
+0. **Deduplication guard:** Check if `## Active Sessions` in MEMORY.md already contains a summary for the current session (match session number and today's date). If yes: this is a double-run. Skip to step 7 (memory-sync only).
 1. **Update Current State** (Section 2 triggers)
 2. **Update PTL statuses** for any items discussed
 3. **Write session summary** in MEMORY.md `## Active Sessions`:
    - Session number and date
    - Significance flag: PARADIGM or ROUTINE
    - 3-5 line summary
-4. **Classify significance:**
-   - **PARADIGM:** Changed approach, new insight, corrected assumption, major milestone, or user flags it
-   - **ROUTINE:** Incremental progress, expected execution, no significant decisions
-   - **If unsure, default PARADIGM** — cost of keeping a 5-line block is negligible
-5. **Update Health Metrics:**
-   - Line count (use `wc -l .longmem/memory/MEMORY.md`)
-   - PTL item count
-   - Corrections count
-   - Broken file refs (should be 0)
-   - Oldest unarchived ROUTINE session
+4. **Classify:** PARADIGM (new insight, direction change, milestone) or ROUTINE (incremental). Default PARADIGM if unsure.
+5. **Update Health Metrics:** line count, PTL count, corrections count, broken refs, oldest ROUTINE, health vector (Section 9)
 6. **Run integrity checks** (Section 7)
 7. **Commit memory files:** run `.longmem/scripts/memory-sync.sh`
-
-**Do not skip session end protocol.** This is the L3 recovery mechanism.
 
 ---
 
@@ -111,16 +88,9 @@ When MEMORY.md ≥180 lines:
 3. If this is a repeat violation (2+ times), promote to L1 (hot corrections in MEMORY.md)
 4. Never make the same mistake twice — that's the entire point
 
-**L1 Corrections (Hot Five):**
-- MEMORY.md displays max 5 corrections
-- Swap based on violation frequency
-- When rotating: log rotation with date and reason in corrections.md
-- L1 corrections are pointers — full text lives in corrections.md
+**L1 (Hot Five):** Max 5 in MEMORY.md, swap by violation frequency. Full text lives in corrections.md.
 
-**When you violate a correction:**
-1. Update "Last violated" date in corrections.md
-2. If violation count increases, consider promoting to L1
-3. If already in L1, no action needed beyond date update
+**On violation:** Update "Last violated" date. If 2+ violations, promote to L1.
 
 ---
 
@@ -169,7 +139,56 @@ When Health Metrics shows "Sessions since System Review" ≥10:
 
 ---
 
-## 9. Protocol Self-Limiting
+## 9. Health Vector
+
+Compute at session end. Store in MEMORY.md Health Metrics.
+
+**Dimensions (each 0-1):**
+- **p (pressure):** `wc -l .longmem/memory/MEMORY.md` / 200. Healthy: 0.3-0.7.
+- **f (freshness):** Days since newest correction violation / 30. Healthy: < 0.5. If no corrections yet: 0.
+- **v (coverage):** File Map entries that resolve / total entries. Healthy: 1.0.
+- **d (drift):** Sessions since last system review / 10. Healthy: < 1.0.
+
+**Display:** `[p=0.6 f=0.3 v=1.0 d=0.4]` in Health Metrics table.
+
+**Change detection:** Compare current vector to stored vector from last session. If any dimension shifted > 0.2, flag: "Health: [dim] shifted [old] → [new]."
+
+**Action thresholds (inform, don't automate):**
+- p > 0.9: Compression overdue. Read Section 3.
+- f > 1.0: All corrections stale 30+ days. Consider rotation (Section 5).
+- v < 1.0: Broken references. Fix immediately.
+- d ≥ 1.0: System review overdue. Run Section 8.
+
+---
+
+## 10. Crash Recovery (Tiered)
+
+If session starts with errors (YAML parse failure, broken File Map refs, health vector anomaly):
+
+**Tier 1 — Auto-repair:**
+- Count mismatch: recalculate from source file
+- Broken ref: remove from File Map, flag to user
+- Stale metric: recompute from current state
+- If fixed → resume normal startup
+
+**Tier 2 — Git revert (if Tier 1 fails):**
+1. If `.longmem/.recovering` exists → go to Tier 3
+2. Create `.longmem/.recovering`
+3. `git checkout <most-recent-sync> -- .longmem/` — revert to stable (max depth 1)
+4. Preserve new corrections: `git diff <stable>..HEAD -- .longmem/memory/corrections.md`
+5. Remove `.longmem/.recovering`, resume startup
+
+**Tier 3 — Escalate:** STOP. Tell user: "Memory corrupted. Last 5 sync commits: [list]. Pick a restore point." Do NOT recurse or re-execute crashed session tasks.
+
+---
+
+## 11. Mid-Session Checkpoints (Optional)
+
+After completing a major deliverable: update MEMORY.md current state, run `.longmem/scripts/memory-sync.sh`. Use judgment — checkpoint after features, plans, test suites, not small edits. ~50 tokens per checkpoint.
+
+---
+
+## 12. Protocol Self-Limiting
 
 This file stays under 200 lines. No explanations — only triggers and actions. If edge cases accumulate, compress into general principles.
 

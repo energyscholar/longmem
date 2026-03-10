@@ -29,6 +29,7 @@ You have a persistent memory directory at `.longmem/memory/`. Its contents persi
 
 ### Session End Protocol
 
+0. **Check for double-run:** If MEMORY.md already has today's session summary, skip to step 6 (sync only).
 1. Update current state in `.longmem/memory/MEMORY.md`
 2. Write session summary to `.longmem/memory/session-details.md`
    - Classify session as PARADIGM (major breakthrough, new direction) or ROUTINE
@@ -88,6 +89,7 @@ Track in MEMORY.md:
 - Oldest unarchived ROUTINE session (target: <3 weeks)
 - Broken file references (target: 0)
 - Sessions since last system review (every 10 sessions, ask user "anything missing from my context?")
+- Health vector: `[p=X f=X v=X d=X]` — computed at session end per protocol.md Section 9
 
 ## Response Style
 

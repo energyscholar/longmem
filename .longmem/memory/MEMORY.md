@@ -72,6 +72,7 @@
 | Oldest unarchived ROUTINE | <3 weeks | N/A | Flag if older |
 | Broken file refs | 0 | 0 | All paths in File Map must resolve |
 | Sessions since System Review | <10 | 1 | Ask user every 10 sessions |
+| Health vector | [p f v d] in range | [p=0.0 f=0.0 v=1.0 d=0.0] | — |
 
 <!-- Update at session end. If any metric is out of bounds, read protocol.md. -->
 
