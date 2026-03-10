@@ -156,6 +156,40 @@ See [`docs/case-study.md`](docs/case-study.md) for details.
 
 ---
 
+## Troubleshooting
+
+**Claude doesn't load MEMORY.md**
+- Verify `CLAUDE.md` is in the project root (not a subdirectory)
+- Restart Claude Code (`claude` from the project directory)
+- Check that `memory/MEMORY.md` exists and is not empty
+
+**memory-sync.sh fails**
+- Run `git init` if this is a new project (script requires a git repo)
+- On macOS: ensure bash is available (`bash --version`)
+- Check file permissions: `chmod +x scripts/memory-sync.sh`
+
+**PTL commands not recognized**
+- Claude needs to read `CLAUDE.md` first — start the session from the project root
+- Try: "Read CLAUDE.md and then show me the PTL"
+
+**MEMORY.md getting too long**
+- Normal: the AI should compress automatically at 180 lines
+- If not compressing: say "MEMORY.md is over 180 lines, please compress per protocol.md"
+
+**Requirements:** Claude Code, git, bash. Tested on Ubuntu 22.04+ and macOS 13+. Windows: untested, should work under WSL2.
+
+---
+
+## What longmem is NOT
+
+- **Not a plugin or extension** — It's files. No installation, no dependencies.
+- **Not cloud-synced** — Memory lives on your filesystem + git. You own it.
+- **Not automatic** — The AI maintains the memory, but you direct the project.
+- **Not multi-user** — Each developer has their own memory. Share context via project docs.
+- **Not a replacement for documentation** — longmem is project context for the AI, not docs for humans.
+
+---
+
 ## Contributing
 
 longmem is deliberately minimal. Additions should:
