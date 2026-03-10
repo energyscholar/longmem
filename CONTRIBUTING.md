@@ -8,6 +8,7 @@ longmem is deliberately minimal. Every file and rule traces back to a specific, 
 - **Documentation improvements** — Clearer instructions, better examples, typo fixes
 - **Template improvements** — Better defaults, more helpful starter content
 - **Troubleshooting additions** — If you hit a problem and solved it, document it
+- **Task tracking improvements** — Better thread extraction, narrative summaries, PTL integration
 
 ## What's out of scope for v1
 

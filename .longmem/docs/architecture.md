@@ -199,6 +199,25 @@ Tiers prevent everything from being "high priority." Decay prevents zombies.
 
 ---
 
+## Three-Layer Task Tracking
+
+Not everyone works with structured task lists. longmem offers three layers — users naturally settle into whatever feels right:
+
+**Layer 1 — Implicit (Open Threads):**
+Zero maintenance. The system extracts "open threads" from session summaries — topics mentioned as incomplete across multiple sessions. Threads appear in MEMORY.md, decay automatically when no longer discussed. Based on Zeigarnik effect: unfinished tasks persist in attention.
+
+**Layer 2 — Narrative:**
+At session start, MEMORY.md's Active Sessions section provides a natural "where was I?" briefing. The system maintains this; the user reads and corrects. No structured input required.
+
+**Layer 3 — Explicit PTL:**
+Structured YAML with stable IDs, tiers, decay rules. For users who want full control. ~20-25% of developers voluntarily maintain systems like this (RescueTime 2019, triangulated).
+
+Each layer feeds upward: threads can be promoted to PTL items. PTL items reference threads. The system adapts to the user, not the reverse.
+
+**Design principle:** Structure as a service. The system maintains structure from behavioral signals. Users interact naturally. Forcing structured approaches on unstructured thinkers reduces both satisfaction and output (Czerwinski et al. 2004, Kirton Adaption-Innovation theory).
+
+---
+
 ## Design Rationale
 
 **Why not a database?**

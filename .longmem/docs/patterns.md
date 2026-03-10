@@ -65,6 +65,8 @@ Examples:
 
 **Test:** If the AI has a bad session and forgets half its instructions, does the thing still work? If yes, it's structural. If no, it's behavioral and fragile.
 
+**See also:** Open threads (implicit task tracking) — a structural approach to task continuity that requires zero user maintenance. Protocol.md Section 13.
+
 ---
 
 ## Pattern 5: Inform, Don't Optimize (DN Level 0)

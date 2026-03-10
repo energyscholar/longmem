@@ -49,6 +49,16 @@
 
 ---
 
+## Open Threads
+
+<!-- Auto-maintained. Topics from recent sessions that remain unresolved. Max 5. -->
+<!-- Threads appear when mentioned in 2+ sessions. Drop off after 3 sessions without mention. -->
+<!-- Say "PTL add: [thread]" to promote to explicit task tracking. -->
+
+<!-- No threads yet. They'll appear after 2-3 sessions. -->
+
+---
+
 ## File Map
 
 <!-- Paths to L2 files. One-line descriptions. Update when files are added/removed. -->

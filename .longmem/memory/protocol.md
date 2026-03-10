@@ -41,19 +41,11 @@ If nothing substantive changed, don't touch it. Avoid churn.
 
 **MEMORY.md line cap: 200 lines. Enforcement threshold: 180 lines.**
 
-When MEMORY.md ≥180 lines:
-
-1. **BEFORE doing anything else in the session**, read this section
-2. Identify oldest ROUTINE session in `## Active Sessions`
-3. Move full summary to `.longmem/memory/session-details.md`
-4. Replace with 1-line pointer: `Session NN (ROUTINE, YYYY-MM-DD) — [topic]. Details in session-details.md.`
-5. If no ROUTINE sessions remain, compress oldest PARADIGM to 3-5 lines (never less)
-6. Update Health Metrics line count
-7. Verify MEMORY.md is now <180 lines before proceeding
+When MEMORY.md ≥180 lines: 1) Archive oldest ROUTINE session to session-details.md, leave 1-line pointer. 2) If no ROUTINE remains, compress oldest PARADIGM to 3-5 lines. 3) Update Health Metrics, verify <180 lines.
 
 **Never compress:** Identity, Current State, L1 Corrections, Health Metrics, File Map.
 
-**Overflow:** Section >20 lines → extract to L2 file, leave pointer. L2 file >300 lines → archive to git (L3). Index >150 lines → compress to navigation only. Always: move content → leave pointer → update File Map.
+**Overflow:** Section >20 lines → extract to L2 file, leave pointer → update File Map. L2 >300 lines → archive to git.
 
 ---
 
@@ -113,13 +105,7 @@ Run at session end. **Do not silently fix — flag anomalies to user.**
 
 ## 8. System Review (Every 10 Sessions)
 
-When Health Metrics shows "Sessions since System Review" ≥10:
-
-1. Ask user: "Anything missing from my context?"
-2. Review file map for orphans
-3. Review corrections.md for outdated entries
-4. Review ptl.yaml for stalled items
-5. Reset "Sessions since System Review" counter to 0
+When "Sessions since System Review" ≥10: ask user "Anything missing from my context?", review file map/corrections/PTL for orphans/outdated/stalled, reset counter to 0.
 
 ---
 
@@ -166,30 +152,43 @@ If session starts with errors (YAML parse failure, broken File Map refs, health 
 
 ---
 
-## 11. Mid-Session Checkpoints (Optional)
+## 11. Mid-Session Checkpoints
 
-After completing a major deliverable: update MEMORY.md current state, run `.longmem/scripts/memory-sync.sh`. Use judgment — checkpoint after features, plans, test suites, not small edits. ~50 tokens per checkpoint.
-
----
-
-## 12. Tutorials (Progressive Disclosure)
-
-At session start, after startup checks, if ptl.yaml has no tutorial items with status ACTIVE:
-
-| Trigger | Item | Teaches |
-|---------|------|---------|
-| Session ≥3, no plan written yet | PTL-T01 | Planning (Pattern 1) |
-| Session ≥5, corrections exist | PTL-T02 | Red-team (Pattern 2) |
-| Session ≥8, >3 PTL items | PTL-T03 | Role separation (Pattern 3) |
-| Session ≥10 | PTL-T04 | Structure over behavior (Pattern 4) |
-| Health vector computed 3+ times | PTL-T05 | Inform not optimize (Pattern 5) |
-| Session ≥12, corrections ≥3 | PTL-T06 | Finding your edge (Pattern 6) |
-| Session ≥6, PTL items exist | PTL-T07 | Specs first (Pattern 7) |
-
-**Rules:** Max ONE new tutorial per session. Skip if user said "no tutorials." All tutorials are tier 5, decay_exempt, owner "longmem". Add to ptl.yaml only when trigger fires. Reference: `.longmem/docs/patterns.md`.
+After major deliverables: update MEMORY.md current state, run `.longmem/scripts/memory-sync.sh`. Checkpoint after features/plans/test suites, not small edits.
 
 ---
 
-## 13. Protocol Self-Limiting
+## 12. Tutorials & Progressive Disclosure
 
-This file stays under 200 lines. No explanations — only triggers and actions. Compress edge cases into general principles. This is a living document.
+At session start, if no tutorial items are ACTIVE in ptl.yaml, check triggers:
+
+| Sessions ≥ | + Condition | Adds | Pattern |
+|-----------|-------------|------|---------|
+| 3 | no plan written | PTL-T01 | Planning |
+| 5 | corrections exist | PTL-T02 | Red-team |
+| 8 | >3 PTL items | PTL-T03 | Role separation |
+| 10 | — | PTL-T04 | Structure > behavior |
+| 3+ health vectors | — | PTL-T05 | Inform not optimize |
+| 12 | corrections ≥3 | PTL-T06 | Finding your edge |
+| 6 | PTL items exist | PTL-T07 | Specs first |
+
+Max ONE per session. Skip if user said "no tutorials." Templates in ptl.yaml (commented). Reference: `.longmem/docs/patterns.md`.
+
+---
+
+## 13. Open Threads (Implicit Task Tracking)
+
+At session end, after writing the session summary, extract open threads:
+
+1. **Scan** the current session for topics mentioned as incomplete, deferred, or "next time"
+2. **Compare** against MEMORY.md Active Sessions — topics in ≥3 of last 5 sessions are high-signal
+3. **Update** the `## Open Threads` section in MEMORY.md (max 5 items, one line each)
+4. **Promote** — if user says "PTL add" for a thread, move it to ptl.yaml with proper ID
+
+Format: `- [topic] (sessions: N, last: YYYY-MM-DD)` — one line per thread, max 5. Stale threads (>3 sessions without mention) drop off. If user says "no tracking", skip this step.
+
+---
+
+## 14. Protocol Self-Limiting
+
+This file stays under 200 lines. Compress edge cases into general principles.

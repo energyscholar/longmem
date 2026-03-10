@@ -12,7 +12,7 @@ AI coding assistants are stateless. Every conversation starts from zero. For a w
 
 - **Persistent identity** — The AI knows what project it's working on, what matters, and where things are
 - **Error tracking** — Corrections you make persist across sessions. Repeat violations drop to near zero.
-- **Task continuity** — Stable task IDs, five-tier prioritization, automatic decay for stale items
+- **Task continuity** — Three layers: implicit thread tracking (zero maintenance), narrative summaries, and optional structured task lists
 - **Decision log** — Structural decisions with rationale. Prevents re-litigating settled questions.
 - **Self-maintenance** — The AI maintains its own memory: compression, integrity checks, health metrics, git snapshots
 
@@ -125,6 +125,10 @@ Once longmem is set up, these commands work in any session:
 - `PTL add: fix the auth bug` — Add a task (Claude will ask for tier/priority)
 - `PTL close PTL-003` — Mark a task done
 
+**Threads:**
+- `threads` — Show topics that keep coming up across sessions (auto-tracked)
+- `PTL add: [thread]` — Promote a recurring thread to a formal task
+
 **Corrections:**
 - "You keep calling it a REST API — it's GraphQL. Add a correction." → Claude adds it to `corrections.md` and starts enforcing it
 - "That correction is outdated, remove it." → Claude updates the file
@@ -142,7 +146,7 @@ Once longmem is set up, these commands work in any session:
 
 - **Memory templates** — MEMORY.md, corrections.md, ptl.yaml, decisions.md, session-details.md, people.md
 - **Session lifecycle protocol** — Start checklist, end checklist, compression rules, decay timers
-- **PTL (Prioritized Task List)** — YAML-based, stable IDs, five tiers, natural language commands
+- **Task tracking** — Implicit open threads (zero maintenance) + optional PTL (YAML, stable IDs, five tiers)
 - **Corrections system** — Persistent error tracking with hot-five rotation
 - **Health metrics dashboard** — Line count, item count, orphan detection, integrity checks
 - **Git sync script** — L3 recovery via automatic commits
@@ -158,7 +162,7 @@ Once longmem is set up, these commands work in any session:
 | ~30% of session re-explaining context | <5% |
 | Same corrections every session | Near-zero repeat violations |
 | Decisions lost between sessions | All decisions logged with rationale |
-| No task continuity | Stable task IDs, five-tier prioritization |
+| No task continuity | Auto-tracked threads + optional structured tasks |
 | Context window exhaustion | Tiered caching keeps context lean |
 | Manual git commits | Automatic session-end sync |
 

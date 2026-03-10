@@ -55,6 +55,17 @@ When the user says:
 - **"PTL update PTL-NNN: [changes]"** — Update existing item
 - **"PTL close PTL-NNN"** — Mark item as DONE
 
+### Open Threads (Implicit Task Tracking)
+
+Longmem automatically tracks topics that recur across sessions. No user action required.
+
+When the user says:
+- **"threads"** — Show current open threads from MEMORY.md
+- **"PTL add: [thread topic]"** — Promote a thread to an explicit PTL item
+- **"no tracking"** — Disable open threads (remove the section from MEMORY.md)
+
+Open threads are extracted at session end from topics mentioned as incomplete or deferred. They appear when mentioned in 2+ sessions and decay after 3 sessions without mention. Max 5 active threads.
+
 ### Three-Tier Cache Model
 
 **L1** (always loaded): `MEMORY.md` — 200-line cap enforced
