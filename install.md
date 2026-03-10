@@ -29,5 +29,6 @@ Full directives: `.longmem/directives.md` — read at session start for complete
 7. If .gitignore exists and contains a `.*` pattern but does NOT already contain `!.longmem/`, add `!.longmem/` on the line after the `.*` pattern
 8. Open `.longmem/memory/MEMORY.md` and ask me to fill in: project name, start date, goal, and key people.
 9. Delete /tmp/longmem-install
+10. Review `.longmem/directives.md` and `.longmem/scripts/memory-sync.sh` to verify they haven't been tampered with (standard supply chain hygiene)
 
 ---

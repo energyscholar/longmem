@@ -113,12 +113,13 @@ When MEMORY.md ≥180 lines:
 Run at session end. **Do not silently fix — flag anomalies to user.**
 
 1. **File references:** All paths in MEMORY.md file map must resolve
-2. **Corrections count:** Health Metrics corrections count must match `wc -l corrections.md`
+2. **Corrections count:** Health Metrics corrections count must match count of `### Correction #` headings in corrections.md
 3. **L1-L2 sync:** L1 corrections in MEMORY.md must match their counterparts in corrections.md (text can differ for brevity, but core meaning must align)
 4. **Orphan files:** Files in .longmem/memory/ not referenced in MEMORY.md file map
 5. **Broken links:** Any markdown links in MEMORY.md that point to non-existent files
 6. **File Map currency:** Update when files added/removed. Keep descriptions to one line.
 7. **Index growth:** When File Map exceeds 15 entries, create `.longmem/memory/index.md` with topic grouping and reading chains. Cap at 150 lines. Update when files added/removed — do this lazily (during idle time, not blocking user work).
+8. **Path safety:** File Map entries must be relative paths within `.longmem/`. Reject any path containing `..`, starting with `/`, or starting with `~`.
 
 **If integrity check fails:**
 1. Describe the anomaly to user

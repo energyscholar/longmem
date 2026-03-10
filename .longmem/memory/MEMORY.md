@@ -66,8 +66,8 @@
 
 | Metric | Target | Current | Notes |
 |--------|--------|---------|-------|
-| MEMORY.md lines | <180 | ~80 | Line count via `wc -l` |
-| PTL items | ≤60 | 0 | From ptl.yaml |
+| MEMORY.md lines | <180 | -- | Updated at session end |
+| PTL items | ≤60 | 1 | From ptl.yaml |
 | Corrections count | matches corrections.md | 0 | Update when adding corrections |
 | Oldest unarchived ROUTINE | <3 weeks | N/A | Flag if older |
 | Broken file refs | 0 | 0 | All paths in File Map must resolve |

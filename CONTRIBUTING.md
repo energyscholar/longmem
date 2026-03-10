@@ -1,6 +1,6 @@
 # Contributing to longmem
 
-longmem is deliberately minimal. Every file and rule traces back to a specific, documented failure across 33+ sessions of real use.
+longmem is deliberately minimal. Every file and rule traces back to a specific, documented failure across 36 sessions of real use.
 
 ## What's welcome
 
@@ -21,7 +21,7 @@ longmem is deliberately minimal. Every file and rule traces back to a specific, 
 
 1. **Small fixes**: Open a PR directly
 2. **Larger changes**: Open an issue first to discuss rationale and design
-3. **New memory files**: Must fit the three-tier cache model (see `docs/architecture.md`)
+3. **New memory files**: Must fit the three-tier cache model (see `.longmem/docs/architecture.md`)
 
 ## Design principles
 

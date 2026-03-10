@@ -78,27 +78,7 @@ Separation serves multiple purposes:
 
 **Mechanism:** `.longmem/scripts/memory-sync.sh`
 
-At session end, all memory files are committed to git:
-```bash
-#!/bin/bash
-set -e
-REPO="$(cd "$(dirname "$0")/../.." && pwd)"
-cd "$REPO"
-
-if [ ! -d .git ]; then
-    echo "Error: $REPO is not a git repository. Run 'git init' first."
-    exit 1
-fi
-
-git add .longmem/
-
-if git diff --cached --quiet; then
-    echo "Memory sync: no changes to commit."
-else
-    git commit -m "Memory sync: $(date +%Y-%m-%d)"
-    echo "Memory synced: $(git log --oneline -1)"
-fi
-```
+The sync script stages `.longmem/`, generates file checksums for lazy change detection, and commits if anything changed. See `.longmem/scripts/memory-sync.sh` for the current implementation.
 
 **Why git?**
 
@@ -120,7 +100,7 @@ This is the most valuable component and the least expected.
 
 **Format:**
 ```markdown
-## Correction #N: [Short name]
+### Correction #N: [Short name]
 [What the AI gets wrong] → [What to write instead]
 Established: [date]. Last violated: [date or "never"].
 ```
@@ -156,48 +136,9 @@ The system was independently analyzed by ChatGPT without being told about correc
 
 The AI maintains its own memory. No human intervention required (except fixing broken things when integrity checks flag them).
 
-**Session start:**
-1. Read MEMORY.md (auto-loaded)
-2. Check health metrics
-3. If MEMORY.md >180 lines: compress oldest ROUTINE session before proceeding
-4. Read corrections.md (all of them, not just hot five)
-5. Read ptl.yaml if working on tasks
+See directives.md (quick reference) and protocol.md Section 4 (full details) for the session lifecycle.
 
-**Session end (mandatory):**
-1. Update current state in MEMORY.md
-2. Write session summary (classify PARADIGM or ROUTINE)
-3. If MEMORY.md >180 lines: compress oldest ROUTINE session
-4. Run integrity checks (file refs, correction count, L1-L2 sync, orphans)
-5. Update health metrics dashboard
-6. Run `.longmem/scripts/memory-sync.sh` to commit to git
-
-**Compression rules:**
-- MEMORY.md keeps 2-3 active sessions
-- PARADIGM sessions: 3-5 lines, kept indefinitely
-- ROUTINE sessions: 2-3 lines after compression, eventually archived
-- If MEMORY.md >180 lines: archive oldest ROUTINE to session-details.md
-- If no ROUTINE sessions remain: compress oldest PARADIGM to 3-5 lines (never less)
-
-**Decay rules:**
-- PTL Tier 1: untouched >1 week → flag, consider demotion
-- PTL Tier 2: untouched >3 weeks → STALE, >6 weeks → archive
-- PTL Tier 3+: untouched >4 weeks → STALE, >8 weeks → archive
-- Items with NEEDS_PLAN >8 weeks → STALLED
-
-**Integrity checks:**
-- All file paths in MEMORY.md resolve
-- Corrections count in health metrics matches `wc -l corrections.md`
-- L1 corrections match their L2 counterparts (meaning, not necessarily text)
-- No orphan files (files in .longmem/memory/ not referenced in file map)
-- No broken markdown links
-
-**Health metrics tracked:**
-- MEMORY.md line count (target <180)
-- PTL item count (target <60)
-- Corrections count
-- Oldest unarchived ROUTINE session (target <3 weeks old)
-- Broken file references (target 0)
-- Sessions since system review (every 10 sessions: ask user "anything missing?")
+The AI reads MEMORY.md and corrections at session start, updates state and runs integrity checks at session end, compresses when MEMORY.md exceeds 180 lines, and commits everything to git via memory-sync.sh.
 
 ---
 
@@ -301,7 +242,7 @@ Context window is expensive ($200/month for Claude Pro Max). Every line in L1 re
 
 ## Failure Modes and Recovery
 
-longmem evolved under pressure. Every protocol rule traces back to a specific failure.
+longmem evolved under pressure. Every protocol rule traces back to a specific failure. These failures occurred during the 36-session project that produced longmem:
 
 **Compression catastrophe (Session 26):**
 - Migrated from flat TODO file to structured PTL

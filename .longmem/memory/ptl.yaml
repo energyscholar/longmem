@@ -4,7 +4,7 @@
 meta:
   version: 1
   last_modified: "2026-03-09T00:00:00Z"
-  item_count: 0  # advisory — actual count is len(items)
+  item_count: 1  # advisory — actual count is len(items)
   tiers:
     1: "Urgent / Close Now"
     2: "Active Projects"
@@ -13,7 +13,43 @@ meta:
     5: "Someday"
   statuses: [READY, ACTIVE, BLOCKED, REVIEW, NEEDS_PLAN, TODO, DONE, DROPPED]
 
-items: []
+items:
+  - id: PTL-000
+    title: "Getting started with longmem (delete when comfortable)"
+    tier: 4
+    status: ACTIVE
+    owner: user
+    blocked_by: null
+    detail: null
+    source: "template"
+    created: 2026-03-10
+    touched: 2026-03-10
+    decay_exempt: true
+    note: |
+      Welcome! This item teaches you how longmem works. Type "PTL" anytime
+      to see your task list. Delete this item when you're comfortable.
+
+      KEY CONCEPTS:
+      - Memory lives in .longmem/memory/. MEMORY.md is always loaded (L1 cache).
+      - Corrections prevent repeat mistakes. Add them when you're corrected.
+      - Sessions are classified PARADIGM (significant) or ROUTINE (incremental).
+      - Health vector [p f v d] tracks system state. Computed at session end.
+      - Run .longmem/scripts/memory-sync.sh to snapshot to git (L3 backup).
+
+      FIRST STEPS:
+      1. Fill in MEMORY.md Identity section with your project details
+      2. Start working — longmem learns as you go
+      3. After 2-3 sessions, check Health Metrics in MEMORY.md
+      4. After 5+ sessions, corrections and PTL will be populated
+
+      OPTIONAL LAYERS (for complex/long projects):
+      - Triad (Auditor/Generator role discipline): Auditor plans, Generator
+        executes. Separation prevents scope creep and confabulation. Most valuable
+        when specs are ambiguous or project exceeds 10 sessions.
+      - Dignity Net (governance): Relational health monitoring. Detects
+        divergence between stated goals and observable actions. Optional.
+
+      Type "PTL done: PTL-000" to archive this item when ready.
 
 # Example item (uncomment and customize):
 #

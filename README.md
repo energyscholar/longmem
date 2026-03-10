@@ -178,6 +178,19 @@ There is no `setup.sh`. That's intentional. The entire setup is: edit one file (
 
 Paste the prompt from [`uninstall.md`](uninstall.md) into Claude Code. It creates a final git snapshot, removes `.longmem/`, and cleans up CLAUDE.md. Memory history is preserved in git and recoverable via `git log --all -- .longmem/`.
 
+## Security & Privacy
+
+**Memory files are committed to git.** If your repo is pushed to GitHub (public or private), all memory content — session history, people data, corrections, task priorities — will be visible to anyone with repo access.
+
+**Treat `.longmem/` like code.** Review changes to `.longmem/` files in PRs with the same scrutiny as code changes. `directives.md` and `corrections.md` control AI behavior — a malicious edit is equivalent to a backdoor.
+
+**Shared repos:** `.longmem/` contains personal project context. In team settings, either:
+- Use per-developer directories (`.longmem-alice/`, `.longmem-bob/`)
+- Add `.longmem/memory/people.md` and `.longmem/memory/session-details.md` to `.gitignore`
+- Or agree as a team that memory content is shared
+
+**Uninstall note:** `rm -rf .longmem/` removes files but history persists in git. For full removal: `git filter-repo --path .longmem/ --invert-paths` (requires force-push).
+
 ---
 
 ## Troubleshooting

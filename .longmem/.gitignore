@@ -1,0 +1,9 @@
+# Prevent accidental commit of sensitive files inside .longmem/
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+*.secret
+credentials*
+*.credential
