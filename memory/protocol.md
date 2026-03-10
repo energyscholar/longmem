@@ -6,6 +6,8 @@
 
 ## 1. Session Start Checklist
 
+> **Early sessions (1-5):** Most of these steps are no-ops when files are empty. Read MEMORY.md, read corrections.md, start working. The full protocol activates as your project grows.
+
 1. Read `MEMORY.md` (auto-loaded by Claude Code)
 2. Check Health Metrics dashboard
 3. If MEMORY.md >180 lines: read Section 3 (compression), execute before proceeding
@@ -116,36 +118,17 @@ When MEMORY.md >180 lines:
 
 ---
 
-## 6. PTL (Prioritized Task List) Maintenance
+## 6. PTL Maintenance
 
-**Canonical file:** `ptl.yaml`
-**Display:** Rendered on demand
-
-**Commands:**
-- `PTL` — Show active items (tiers 1-3, statuses READY/ACTIVE/BLOCKED/REVIEW/TODO)
-- `PTL full` — Show all tiers including DONE/DROPPED
-- `PTL add: [description]` — Add new item (ask for tier and status)
-- `PTL update PTL-NNN: [changes]` — Update existing item
-- `PTL close PTL-NNN` — Mark as DONE
-
-**Items addressed by stable ID (PTL-NNN), not display position.**
-
-**Tier definitions:**
-1. Urgent / Close Now
-2. Active Projects
-3. Queued
-4. Infrastructure
-5. Someday
-
-**Statuses:** READY, ACTIVE, BLOCKED, REVIEW, NEEDS_PLAN, TODO, DONE, DROPPED
+**Canonical file:** `ptl.yaml`. Commands and schema defined in CLAUDE.md.
 
 **Decay rules:**
-- Tier 1: No auto-decay. Untouched >1 week → flag to user, consider demotion to Tier 2
-- Tier 2: Untouched >3 weeks → STALE, >6 weeks → archive to DONE or DROPPED
+- Tier 1: No auto-decay. Untouched >1 week → flag to user
+- Tier 2: Untouched >3 weeks → STALE, >6 weeks → archive
 - Tier 3+: Untouched >4 weeks → STALE, >8 weeks → archive
-- Items with NEEDS_PLAN status >8 weeks → STALLED (flag to user)
+- NEEDS_PLAN >8 weeks → STALLED (flag to user)
 
-**Bandwidth cap:** PTL item count target <60. If exceeded, review and archive.
+**Bandwidth cap:** Item count target <60. If exceeded, review and archive.
 
 ---
 
