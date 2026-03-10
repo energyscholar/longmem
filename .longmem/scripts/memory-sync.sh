@@ -18,6 +18,6 @@ git add .longmem/.file-hashes
 if git diff --cached --quiet; then
     echo "Memory sync: no changes to commit."
 else
-    git commit -m "Memory sync: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    git commit .longmem/ -m "Memory sync: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
     echo "Memory synced: $(git log --oneline -1)"
 fi
