@@ -40,6 +40,7 @@ Or use GitHub's "Use this template" button.
 ### Stage 2: After ~5 Sessions
 
 - Claude will start making mistakes about your project. When it does, say: "Add a correction: [what's wrong] → [what's right]." Claude adds it to `corrections.md` and checks it every session.
+- Around session 3-5, tutorial items start appearing in your PTL (tier 5). Each teaches one methodology pattern. They're gentle suggestions, not requirements — delete them anytime.
 - If you're tracking tasks, say "PTL add: [task]." Claude manages `ptl.yaml`.
 
 ### Stage 3: After ~10 Sessions
@@ -145,6 +146,7 @@ Once longmem is set up, these commands work in any session:
 - **Corrections system** — Persistent error tracking with hot-five rotation
 - **Health metrics dashboard** — Line count, item count, orphan detection, integrity checks
 - **Git sync script** — L3 recovery via automatic commits
+- **Progressive tutorials** — Methodology patterns appear as PTL items when your project is ready for them
 - **Full documentation** — Architecture deep-dive, case study, worked examples
 
 ---

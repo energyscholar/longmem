@@ -276,6 +276,7 @@ The system is deliberately minimal. Extensions should:
 4. Not require infrastructure or dependencies
 
 **Good extensions:**
+- Methodology patterns (`.longmem/docs/patterns.md`) — planning, red-teaming, role separation
 - Additional L2 files for specific project needs (e.g., `api-endpoints.md`, `deployment-checklist.md`)
 - Project-specific health metrics
 - Custom PTL tiers or statuses

@@ -116,6 +116,7 @@ Track in MEMORY.md:
 Commands that override defaults:
 - **"read full"** — Read entire file regardless of size
 - **"more"** / **"verbose"** — Longer, more detailed response
+- **"no tutorials"** — Suppress tutorial PTL items from appearing
 
 ---
 

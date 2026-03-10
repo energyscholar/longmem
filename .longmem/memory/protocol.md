@@ -77,20 +77,9 @@ When MEMORY.md ≥180 lines:
 
 ## 5. Corrections Management
 
-**When user corrects you:**
-1. Acknowledge immediately
-2. Add to `.longmem/memory/corrections.md` with format:
-   ```
-   ### Correction #N: [Short name]
-   [What you get wrong] → [What to write instead]
-   Established: [date]. Last violated: [date or "never"].
-   ```
-3. If this is a repeat violation (2+ times), promote to L1 (hot corrections in MEMORY.md)
-4. Never make the same mistake twice — that's the entire point
+**When user corrects you:** Acknowledge → add to corrections.md (format: `### Correction #N: [name]`, what's wrong → what's right, dates) → if repeat (2+), promote to L1. Never make the same mistake twice.
 
-**L1 (Hot Five):** Max 5 in MEMORY.md, swap by violation frequency. Full text lives in corrections.md.
-
-**On violation:** Update "Last violated" date. If 2+ violations, promote to L1.
+**L1 (Hot Five):** Max 5 in MEMORY.md, swap by violation frequency. On violation: update "Last violated" date, promote if 2+.
 
 ---
 
@@ -113,18 +102,12 @@ When MEMORY.md ≥180 lines:
 Run at session end. **Do not silently fix — flag anomalies to user.**
 
 1. **File references:** All paths in MEMORY.md file map must resolve
-2. **Corrections count:** Health Metrics corrections count must match count of `### Correction #` headings in corrections.md
-3. **L1-L2 sync:** L1 corrections in MEMORY.md must match their counterparts in corrections.md (text can differ for brevity, but core meaning must align)
-4. **Orphan files:** Files in .longmem/memory/ not referenced in MEMORY.md file map
-5. **Broken links:** Any markdown links in MEMORY.md that point to non-existent files
-6. **File Map currency:** Update when files added/removed. Keep descriptions to one line.
-7. **Index growth:** When File Map exceeds 15 entries, create `.longmem/memory/index.md` with topic grouping and reading chains. Cap at 150 lines. Update when files added/removed — do this lazily (during idle time, not blocking user work).
-8. **Path safety:** File Map entries must be relative paths within `.longmem/`. Reject any path containing `..`, starting with `/`, or starting with `~`.
+2. **Corrections count:** Health Metrics count must match `### Correction #` headings in corrections.md
+3. **L1-L2 sync:** L1 corrections in MEMORY.md must match counterparts in corrections.md (brevity OK, meaning must align)
+4. **Orphan/broken:** Flag files in .longmem/memory/ not in File Map, or linked but missing. Update File Map when files added/removed.
+5. **Path safety:** File Map entries must be relative paths within `.longmem/`. Reject `..`, `/`, or `~` prefixes.
 
-**If integrity check fails:**
-1. Describe the anomaly to user
-2. Propose fix
-3. Wait for approval before fixing (unless trivial, like updating a count)
+**If integrity check fails:** Describe anomaly → propose fix → wait for approval (unless trivial).
 
 ---
 
@@ -189,8 +172,24 @@ After completing a major deliverable: update MEMORY.md current state, run `.long
 
 ---
 
-## 12. Protocol Self-Limiting
+## 12. Tutorials (Progressive Disclosure)
 
-This file stays under 200 lines. No explanations — only triggers and actions. If edge cases accumulate, compress into general principles.
+At session start, after startup checks, if ptl.yaml has no tutorial items with status ACTIVE:
 
-**This is a living document.** Add sections as patterns emerge. Archive sections that become obsolete.
+| Trigger | Item | Teaches |
+|---------|------|---------|
+| Session ≥3, no plan written yet | PTL-T01 | Planning (Pattern 1) |
+| Session ≥5, corrections exist | PTL-T02 | Red-team (Pattern 2) |
+| Session ≥8, >3 PTL items | PTL-T03 | Role separation (Pattern 3) |
+| Session ≥10 | PTL-T04 | Structure over behavior (Pattern 4) |
+| Health vector computed 3+ times | PTL-T05 | Inform not optimize (Pattern 5) |
+| Session ≥12, corrections ≥3 | PTL-T06 | Finding your edge (Pattern 6) |
+| Session ≥6, PTL items exist | PTL-T07 | Specs first (Pattern 7) |
+
+**Rules:** Max ONE new tutorial per session. Skip if user said "no tutorials." All tutorials are tier 5, decay_exempt, owner "longmem". Add to ptl.yaml only when trigger fires. Reference: `.longmem/docs/patterns.md`.
+
+---
+
+## 13. Protocol Self-Limiting
+
+This file stays under 200 lines. No explanations — only triggers and actions. Compress edge cases into general principles. This is a living document.

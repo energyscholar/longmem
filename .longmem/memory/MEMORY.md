@@ -59,6 +59,7 @@
 - `.longmem/memory/decisions.md` — Structural decisions with rationale
 - `.longmem/memory/session-details.md` — Full session history (compression target)
 - `.longmem/memory/people.md` — Key contacts in tiers (optional)
+- `.longmem/docs/patterns.md` — Methodology patterns (planning, red-team, role separation)
 
 ---
 

@@ -42,7 +42,15 @@ items:
       3. After 2-3 sessions, check Health Metrics in MEMORY.md
       4. After 5+ sessions, corrections and PTL will be populated
 
+      TUTORIALS: As your project matures, tutorial items will appear in your
+      PTL (tier 5). Each teaches one methodology pattern — planning, red-teaming,
+      role separation, and more. They appear when relevant, not all at once.
+      Delete them when you've tried the technique. See .longmem/docs/patterns.md.
+
       OPTIONAL LAYERS (for complex/long projects):
+      - Planning Discipline: Plan → red-team → iterate → implement → verify.
+        Even simple tasks benefit from "what does done look like?" before starting.
+        See .longmem/docs/patterns.md for the full pattern set.
       - Triad (Auditor/Generator role discipline): Auditor plans, Generator
         executes. Separation prevents scope creep and confabulation. Most valuable
         when specs are ambiguous or project exceeds 10 sessions.
@@ -65,3 +73,144 @@ items:
 #    touched: 2026-03-09
 #    decay_exempt: false
 #    note: "Login fails with 401 after token expires. Reproduce: wait 30min, click any link."
+
+# ============================================================
+# Tutorial items (activated by protocol.md Section 12 triggers)
+# Copy, uncomment, and add to items[] when trigger fires.
+# ============================================================
+#
+#  - id: PTL-T01
+#    title: "Tutorial: Plan before you build"
+#    tier: 5
+#    status: ACTIVE
+#    owner: longmem
+#    blocked_by: null
+#    detail: null
+#    source: "tutorial"
+#    created: YYYY-MM-DD
+#    touched: YYYY-MM-DD
+#    decay_exempt: true
+#    note: |
+#      You've had a few sessions now. Before your next non-trivial task, try:
+#      1. What am I doing? (1-2 sentences)
+#      2. What does "done" look like?
+#      3. What could go wrong?
+#      Even a 5-line plan catches issues before they cost implementation time.
+#      Details: .longmem/docs/patterns.md (Pattern 1)
+#      Type "PTL done: PTL-T01" when you've tried it.
+#
+#  - id: PTL-T02
+#    title: "Tutorial: Red-team your plans"
+#    tier: 5
+#    status: ACTIVE
+#    owner: longmem
+#    blocked_by: null
+#    detail: null
+#    source: "tutorial"
+#    created: YYYY-MM-DD
+#    touched: YYYY-MM-DD
+#    decay_exempt: true
+#    note: |
+#      You have corrections now — proof that mistakes happen. Before implementing,
+#      ask: "What would break this?" Check for feedback loops, boundary cases,
+#      idempotency, and recursion. Iterate until only LOW issues remain.
+#      Details: .longmem/docs/patterns.md (Pattern 2)
+#      Type "PTL done: PTL-T02" when you've tried it.
+#
+#  - id: PTL-T03
+#    title: "Tutorial: Separate planning from implementation"
+#    tier: 5
+#    status: ACTIVE
+#    owner: longmem
+#    blocked_by: null
+#    detail: null
+#    source: "tutorial"
+#    created: YYYY-MM-DD
+#    touched: YYYY-MM-DD
+#    decay_exempt: true
+#    note: |
+#      If you catch yourself adding "while I'm at it..." features, or if tasks
+#      keep growing beyond their original scope, try role separation:
+#      - Plan in one session (or one shell). Define acceptance criteria.
+#      - Implement in a separate session (or shell). Follow the plan exactly.
+#      The plan document is the contract. Separation prevents scope creep.
+#      Details: .longmem/docs/patterns.md (Pattern 3)
+#      Type "PTL done: PTL-T03" when you've tried it.
+#
+#  - id: PTL-T04
+#    title: "Tutorial: Build it into the system, not the instructions"
+#    tier: 5
+#    status: ACTIVE
+#    owner: longmem
+#    blocked_by: null
+#    detail: null
+#    source: "tutorial"
+#    created: YYYY-MM-DD
+#    touched: YYYY-MM-DD
+#    decay_exempt: true
+#    note: |
+#      If something needs to happen reliably, make it structural — built into
+#      scripts or data — not behavioral ("remember to do X").
+#      Test: if the AI has a bad session and forgets half its instructions,
+#      does the thing still work? If not, it's fragile.
+#      Details: .longmem/docs/patterns.md (Pattern 4)
+#      Type "PTL done: PTL-T04" when you've tried it.
+#
+#  - id: PTL-T05
+#    title: "Tutorial: Show state, don't automate decisions"
+#    tier: 5
+#    status: ACTIVE
+#    owner: longmem
+#    blocked_by: null
+#    detail: null
+#    source: "tutorial"
+#    created: YYYY-MM-DD
+#    touched: YYYY-MM-DD
+#    decay_exempt: true
+#    note: |
+#      Your health vector shows system state. That's good — it informs you.
+#      Be cautious of features that automatically act on that state.
+#      Systems that reveal earn their cost. Systems that decide reduce transparency.
+#      Details: .longmem/docs/patterns.md (Pattern 5)
+#      Type "PTL done: PTL-T05" when you've tried it.
+#
+#  - id: PTL-T06
+#    title: "Tutorial: Find your productive edge"
+#    tier: 5
+#    status: ACTIVE
+#    owner: longmem
+#    blocked_by: null
+#    detail: null
+#    source: "tutorial"
+#    created: YYYY-MM-DD
+#    touched: YYYY-MM-DD
+#    decay_exempt: true
+#    note: |
+#      Your corrections tell you where your edge is — they cluster around
+#      concepts you're still learning. Your health vector shows pressure.
+#      Too easy: no corrections, all ROUTINE. Too hard: corrections piling up.
+#      Productive: 1-2 new corrections per 3 sessions, p around 0.5-0.7.
+#      This isn't optimization — it's noticing where you are.
+#      Details: .longmem/docs/patterns.md (Pattern 6)
+#      Type "PTL done: PTL-T06" when you've tried it.
+#
+#  - id: PTL-T07
+#    title: "Tutorial: Write specs and tests before code"
+#    tier: 5
+#    status: ACTIVE
+#    owner: longmem
+#    blocked_by: null
+#    detail: null
+#    source: "tutorial"
+#    created: YYYY-MM-DD
+#    touched: YYYY-MM-DD
+#    decay_exempt: true
+#    note: |
+#      Next time you have a feature to build, try this order:
+#      1. Write what it should do (spec)
+#      2. Write a test that fails (encodes the spec)
+#      3. Gap analysis: what's missing?
+#      4. Build to close the gap
+#      Tests written BEFORE code test the spec. Tests written AFTER test the code.
+#      Details: .longmem/docs/patterns.md (Pattern 7)
+#      Type "PTL done: PTL-T07" when you've tried it.
