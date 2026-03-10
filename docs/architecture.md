@@ -292,22 +292,22 @@ Context window is expensive ($200/month for Claude Pro Max). Every line in L1 re
 
 longmem evolved under pressure. Every protocol rule traces back to a specific failure.
 
-**Compression catastrophe (Session 15):**
+**Compression catastrophe (Session 26):**
 - Migrated from flat TODO file to structured PTL
 - Roughly half of high-priority items were dropped during migration
 - **Fix:** Git history allowed reconstruction. Added integrity checks for item count.
 
-**MEMORY.md bloat (Session 18):**
+**MEMORY.md bloat (Session 25):**
 - Hit 233 lines before formalizing the cap
 - Context became bloated, sessions slower
 - **Fix:** Formalized 200-line cap, 180-line enforcement threshold, compression rules.
 
-**Orphan files (Session 22):**
+**Orphan files (~Session 26):**
 - Research documents accumulated without being tracked in file map
 - AI didn't know they existed
 - **Fix:** Added orphan detection to integrity checks.
 
-**Pending item zombies (Session 28):**
+**Pending item zombies (~Session 27-28):**
 - Tasks older than 8 weeks with no plan would sit indefinitely
 - **Fix:** Added STALLED status, automatic decay rules.
 

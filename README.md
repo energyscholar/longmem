@@ -16,7 +16,7 @@ AI coding assistants are stateless. Every conversation starts from zero. For a w
 - **Decision log** — Structural decisions with rationale. Prevents re-litigating settled questions.
 - **Self-maintenance** — The AI maintains its own memory: compression, integrity checks, health metrics, git snapshots
 
-The system evolved under pressure over 33 sessions while co-authoring a 224-page technical manuscript. Every protocol rule traces back to a specific, documented failure.
+The system evolved under pressure over 36 sessions across 16 weeks while co-authoring a 224-page technical manuscript. Every protocol rule traces back to a specific, documented failure.
 
 ---
 
@@ -78,7 +78,7 @@ longmem/
 │   └── memory-sync.sh           # Git sync for L3 recovery
 ├── docs/
 │   ├── architecture.md          # Three-tier cache model explained
-│   └── case-study.md            # 33 sessions, 22 corrections, zero context losses
+│   └── case-study.md            # 36 sessions, 128 commits, zero context losses
 ├── LICENSE                      # MIT
 └── .gitignore                   # Minimal: only OS/editor junk
 ```
@@ -146,8 +146,8 @@ Once longmem is set up, these commands work in any session:
 | Context window exhaustion | Tiered caching keeps context lean |
 | Manual git commits | Automatic session-end sync |
 
-Results from 33 sessions over 6 weeks:
-- **67 task items tracked, 53 plans executed**
+Results from 36 sessions over 16 weeks (128 commits):
+- **49 task items tracked, 65 plans executed**
 - **22 corrections established, repeat violations near zero**
 - **Zero catastrophic context losses** (after system established)
 - **Context re-explanation: 30% → <5%**

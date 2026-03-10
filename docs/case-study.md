@@ -1,10 +1,10 @@
-# Persistent Memory for Claude Code: 33 Sessions, 22 Corrections, Zero Context Losses
+# Persistent Memory for Claude Code: 36 Sessions, 22 Corrections, Zero Context Losses
 
 *Bruce Stephenson — March 2026*
 
 ## The Problem
 
-Claude Code is stateless. Every session starts from zero. For a weekend script, that's fine. For a six-week project — 33 sessions, hundreds of decisions, three collaborators, a 224-page manuscript — it's not workable. By session 10, I was spending roughly 30% of each session re-explaining context the AI had known yesterday. Corrections I'd made on Tuesday would need making again on Wednesday. Decisions we'd agreed on would resurface as open questions.
+Claude Code is stateless. Every session starts from zero. For a weekend script, that's fine. For a sixteen-week project — 36 sessions, hundreds of decisions, three collaborators, a 224-page manuscript — it's not workable. By session 10, I was spending roughly 30% of each session re-explaining context the AI had known yesterday. Corrections I'd made on Tuesday would need making again on Wednesday. Decisions we'd agreed on would resurface as open questions.
 
 Claude Code ships with auto-memory (a model-managed `MEMORY.md`) and project instructions (`CLAUDE.md`). These get you maybe 20% of the way. There's no structure, no error tracking, no task continuity, no recovery mechanism, and no way to enforce that the AI follows its own previous conclusions.
 
@@ -48,17 +48,17 @@ Every protocol rule traces back to a specific failure. That's scar tissue, not t
 
 ## Results
 
-Over 33 sessions across 6+ weeks:
+Over 36 sessions across 16 weeks (112 days):
 
 | Metric | Before | After |
 |--------|--------|-------|
 | Context re-explanation | ~30% of session | <5% |
 | Repeat correction violations | Every session | Near zero |
 | Decision tracking | None | All logged with rationale |
-| Task continuity | None | 67 items tracked, 53 plans executed |
+| Task continuity | None | 49 items tracked, 65 plans executed, 128 commits |
 | Catastrophic context losses | Regular | Zero (after system established) |
 
-The project that drove this system was a 224-page book, co-authored with the AI over the full 33 sessions. The AI — which I named Argus (Claude Opus, Anthropic) — is credited as co-author. Not as a gesture, but because the memory system made genuine longitudinal collaboration possible. Argus maintained corrections, tracked tasks, flagged its own drift, and built on previous sessions' work. Argus also built this template repository.
+The project that drove this system was a 224-page book, co-authored with the AI over the full 36 sessions. The AI — which I named Argus (Claude Opus 4, Anthropic) — is credited as co-author. Not as a gesture, but because the memory system made genuine longitudinal collaboration possible. Argus maintained corrections, tracked tasks, flagged its own drift, and built on previous sessions' work. Argus also built this template repository.
 
 ## Try It
 
