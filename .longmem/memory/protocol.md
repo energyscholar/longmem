@@ -66,6 +66,7 @@ When MEMORY.md ≥180 lines:
 **Content overflow (any section, any file):**
 - When a MEMORY.md section exceeds ~20 lines: create a dedicated L2 file (e.g., `.longmem/memory/architecture.md`), add to File Map, replace section with 1-line pointer.
 - When an L2 file exceeds 300 lines: archive oldest content to git only (L3). Recoverable via `git log -p -- .longmem/memory/[file]`.
+- When index.md exceeds 150 lines: compress by archiving per-session entries to git, keeping only topological navigation and one-line file summaries.
 - Pattern is always: move content → leave pointer → update File Map.
 
 ---
@@ -147,6 +148,7 @@ Run at session end. **Do not silently fix — flag anomalies to user.**
 4. **Orphan files:** Files in .longmem/memory/ not referenced in MEMORY.md file map
 5. **Broken links:** Any markdown links in MEMORY.md that point to non-existent files
 6. **File Map currency:** Update when files added/removed. Keep descriptions to one line.
+7. **Index growth:** When File Map exceeds 15 entries, create `.longmem/memory/index.md` with topic grouping and reading chains. Cap at 150 lines. Update when files added/removed — do this lazily (during idle time, not blocking user work).
 
 **If integrity check fails:**
 1. Describe the anomaly to user

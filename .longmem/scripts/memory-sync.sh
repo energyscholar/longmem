@@ -11,6 +11,10 @@ fi
 
 git add .longmem/
 
+# Generate file checksums for lazy change detection
+md5sum .longmem/memory/*.md .longmem/memory/*.yaml > .longmem/.file-hashes 2>/dev/null || true
+git add .longmem/.file-hashes
+
 if git diff --cached --quiet; then
     echo "Memory sync: no changes to commit."
 else
