@@ -14,6 +14,6 @@ git add memory/ CLAUDE.md
 if git diff --cached --quiet; then
     echo "Memory sync: no changes to commit."
 else
-    git commit -m "Memory sync: $(date +%Y-%m-%d)"
+    git commit -m "Memory sync: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
     echo "Memory synced: $(git log --oneline -1)"
 fi

@@ -42,11 +42,12 @@
 ## Active Sessions
 
 <!-- Keep 2-3 most recent. Older sessions → session-details.md. -->
+<!-- After your first session, write a summary here:
 
-### Session 1 (PARADIGM, YYYY-MM-DD)
-Initial setup. Cloned longmem template, customized MEMORY.md, started first session. System is now maintaining itself.
+### Session 1 (ROUTINE, YYYY-MM-DD)
+[What you worked on. 2-3 sentences.]
 
-*Add new sessions here as you work. Classify each as PARADIGM (major insight, direction change) or ROUTINE (incremental progress).*
+-->
 
 ---
 
@@ -75,6 +76,8 @@ Initial setup. Cloned longmem template, customized MEMORY.md, started first sess
 | Sessions since System Review | <10 | 1 | Ask user every 10 sessions |
 
 <!-- Update at session end. If any metric is out of bounds, read protocol.md. -->
+
+<!-- Add project-specific sections below (tech stack, architecture, key paths, etc.). Keep total MEMORY.md under 200 lines. -->
 
 ---
 
