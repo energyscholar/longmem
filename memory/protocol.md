@@ -10,14 +10,14 @@
 
 1. Read `MEMORY.md` (auto-loaded by Claude Code)
 2. Check Health Metrics dashboard
-3. If MEMORY.md >180 lines: read Section 3 (compression), execute before proceeding
+3. If MEMORY.md ≥180 lines: read Section 3 (compression), execute before proceeding
 4. Read `corrections.md` to load all corrections (not just hot five)
 5. If working on tasks: read `ptl.yaml` for current priorities
 6. If Health Metrics show anomalies: investigate and fix
 
 **Triggers for reading this file:**
 - Health metric out of bounds
-- MEMORY.md >180 lines
+- MEMORY.md ≥180 lines
 - Integrity check fails
 - User asks about protocol
 - Session end (always)
@@ -41,7 +41,7 @@ If nothing substantive changed, don't touch it. Avoid churn.
 
 **MEMORY.md line cap: 200 lines. Enforcement threshold: 180 lines.**
 
-When MEMORY.md >180 lines:
+When MEMORY.md ≥180 lines:
 
 1. **BEFORE doing anything else in the session**, read this section
 2. Identify oldest ROUTINE session in `## Active Sessions`
@@ -62,6 +62,11 @@ When MEMORY.md >180 lines:
 - L1 Corrections
 - Health Metrics
 - File Map
+
+**Content overflow (any section, any file):**
+- When a MEMORY.md section exceeds ~20 lines: create a dedicated L2 file (e.g., `memory/architecture.md`), add to File Map, replace section with 1-line pointer.
+- When an L2 file exceeds 300 lines: archive oldest content to git only (L3). Recoverable via `git log -p -- memory/[file]`.
+- Pattern is always: move content → leave pointer → update File Map.
 
 ---
 
@@ -98,7 +103,7 @@ When MEMORY.md >180 lines:
 1. Acknowledge immediately
 2. Add to `corrections.md` with format:
    ```
-   ## Correction #N: [Short name]
+   ### Correction #N: [Short name]
    [What you get wrong] → [What to write instead]
    Established: [date]. Last violated: [date or "never"].
    ```
@@ -141,6 +146,7 @@ Run at session end. **Do not silently fix — flag anomalies to user.**
 3. **L1-L2 sync:** L1 corrections in MEMORY.md must match their counterparts in corrections.md (text can differ for brevity, but core meaning must align)
 4. **Orphan files:** Files in memory/ not referenced in MEMORY.md file map
 5. **Broken links:** Any markdown links in MEMORY.md that point to non-existent files
+6. **File Map currency:** Update when files added/removed. Keep descriptions to one line.
 
 **If integrity check fails:**
 1. Describe the anomaly to user
@@ -149,26 +155,7 @@ Run at session end. **Do not silently fix — flag anomalies to user.**
 
 ---
 
-## 8. File Map Maintenance
-
-MEMORY.md should contain a `## File Map` section listing all L2 files with short descriptions.
-
-**Template:**
-```
-## File Map
-- `memory/corrections.md` — Recurring errors and how to avoid them
-- `memory/protocol.md` — Session lifecycle rules (this file)
-- `memory/ptl.yaml` — Prioritized task list
-- `memory/decisions.md` — Structural decisions with rationale
-- `memory/session-details.md` — Full session history
-- `memory/people.md` — Key contacts in tiers
-```
-
-Update when files are added or removed. Keep descriptions to one line.
-
----
-
-## 9. System Review (Every 10 Sessions)
+## 8. System Review (Every 10 Sessions)
 
 When Health Metrics shows "Sessions since System Review" ≥10:
 
@@ -180,7 +167,7 @@ When Health Metrics shows "Sessions since System Review" ≥10:
 
 ---
 
-## 10. Protocol Self-Limiting
+## 9. Protocol Self-Limiting
 
 This file stays under 200 lines. No explanations — only triggers and actions. If edge cases accumulate, compress into general principles.
 

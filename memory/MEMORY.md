@@ -30,19 +30,17 @@
 
 <!-- The five most-violated corrections. Full list in corrections.md. -->
 
-*No corrections yet. Add them as they arise. Format:*
-```
-#N: [Short name] — [What not to write] → [What to write instead]
-```
-
-*When you violate a correction, update "Last violated" date in corrections.md.*
+<!-- No corrections yet. As they arise, add here in this format: -->
+<!-- - **#N:** Short name — Don't [X] → [Y instead] -->
 
 ---
 
 ## Active Sessions
 
-<!-- Keep 2-3 most recent. Older sessions → session-details.md. -->
-<!-- After your first session, write a summary here:
+<!-- Keep 2-3 most recent. Older sessions → session-details.md.
+     PARADIGM = major decision, breakthrough, or new direction.
+     ROUTINE = incremental progress, expected execution.
+     Default PARADIGM if unsure.
 
 ### Session 1 (ROUTINE, YYYY-MM-DD)
 [What you worked on. 2-3 sentences.]

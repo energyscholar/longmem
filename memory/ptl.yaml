@@ -4,7 +4,7 @@
 meta:
   version: 1
   last_modified: "2026-03-09T00:00:00Z"
-  item_count: 0
+  item_count: 0  # advisory — actual count is len(items)
   tiers:
     1: "Urgent / Close Now"
     2: "Active Projects"

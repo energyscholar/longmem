@@ -22,7 +22,7 @@ You have a persistent memory directory at `memory/`. Its contents persist across
 
 **After 5+ sessions (when files are populated):**
 3. Check health metrics in MEMORY.md
-4. If MEMORY.md >180 lines: read protocol.md Section 3, compress before proceeding
+4. If MEMORY.md ≥180 lines: read protocol.md Section 3, compress before proceeding
 5. Scan ptl.yaml for ACTIVE and BLOCKED items
 
 **On early sessions (files mostly empty):** Steps 3-5 are no-ops. Just read MEMORY.md and corrections.md, then start working.
@@ -33,7 +33,7 @@ You have a persistent memory directory at `memory/`. Its contents persist across
 2. Write session summary to `memory/session-details.md`
    - Classify session as PARADIGM (major breakthrough, new direction) or ROUTINE
    - Include date, session number, summary
-3. If `MEMORY.md` exceeds 180 lines:
+3. If `MEMORY.md` ≥180 lines:
    - Read `memory/protocol.md` Section 3 (compression rules)
    - Archive oldest ROUTINE session from MEMORY.md to session-details.md
 4. Run integrity checks:
@@ -43,7 +43,7 @@ You have a persistent memory directory at `memory/`. Its contents persist across
 5. Update health metrics dashboard
 6. Run `scripts/memory-sync.sh` to commit memory files to git
 
-### PTL Commands
+### PTL Commands (Prioritized Task List)
 
 When the user says:
 - **"PTL"** — Show current prioritized task list from `memory/ptl.yaml`
@@ -54,15 +54,15 @@ When the user says:
 
 ### Three-Tier Cache Model
 
-**L1** (Always in context): `MEMORY.md` — 200-line cap enforced
-**L2** (Loaded on demand): corrections, protocol, ptl, decisions, session-details, people
-**L3** (Git recovery): Session-end sync script commits everything to git for versioned snapshots
+**L1** (always loaded): `MEMORY.md` — 200-line cap enforced
+**L2** (loaded on demand): corrections, protocol, ptl, decisions, session-details, people
+**L3** (git backup): Session-end sync script commits everything to git for versioned snapshots
 
 ### Corrections System
 
 Each correction prevents a specific recurring error. Format:
 ```
-## Correction #N: [Short name]
+### Correction #N: [Short name]
 [What you get wrong] → [What to write instead]
 Established: [date]. Last violated: [date or "never"].
 ```
@@ -72,7 +72,7 @@ The five most-violated corrections appear in MEMORY.md for visibility. All corre
 ### Self-Maintenance
 
 You maintain your own memory. Triggers:
-- MEMORY.md >180 lines → compress (archive oldest ROUTINE session)
+- MEMORY.md ≥180 lines → compress (archive oldest ROUTINE session)
 - Pending items >3 weeks → STALE
 - Pending items >6 weeks → archive to session-details.md
 - Pending items >8 weeks with no plan → STALLED
