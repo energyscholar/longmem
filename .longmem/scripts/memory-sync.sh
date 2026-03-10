@@ -1,7 +1,7 @@
 #!/bin/bash
 # memory-sync.sh — Commit memory files to git for L3 recovery
 set -e
-REPO="$(cd "$(dirname "$0")/.." && pwd)"
+REPO="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$REPO"
 
 if [ ! -d .git ]; then
@@ -9,7 +9,7 @@ if [ ! -d .git ]; then
     exit 1
 fi
 
-git add memory/ CLAUDE.md
+git add .longmem/
 
 if git diff --cached --quiet; then
     echo "Memory sync: no changes to commit."

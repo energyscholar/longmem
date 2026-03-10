@@ -8,11 +8,11 @@
 
 > **Early sessions (1-5):** Most of these steps are no-ops when files are empty. Read MEMORY.md, read corrections.md, start working. The full protocol activates as your project grows.
 
-1. Read `MEMORY.md` (auto-loaded by Claude Code)
+1. Read `.longmem/memory/MEMORY.md` (auto-loaded by Claude Code)
 2. Check Health Metrics dashboard
 3. If MEMORY.md ≥180 lines: read Section 3 (compression), execute before proceeding
-4. Read `corrections.md` to load all corrections (not just hot five)
-5. If working on tasks: read `ptl.yaml` for current priorities
+4. Read `.longmem/memory/corrections.md` to load all corrections (not just hot five)
+5. If working on tasks: read `.longmem/memory/ptl.yaml` for current priorities
 6. If Health Metrics show anomalies: investigate and fix
 
 **Triggers for reading this file:**
@@ -45,7 +45,7 @@ When MEMORY.md ≥180 lines:
 
 1. **BEFORE doing anything else in the session**, read this section
 2. Identify oldest ROUTINE session in `## Active Sessions`
-3. Move full summary to `session-details.md`
+3. Move full summary to `.longmem/memory/session-details.md`
 4. Replace with 1-line pointer: `Session NN (ROUTINE, YYYY-MM-DD) — [topic]. Details in session-details.md.`
 5. If no ROUTINE sessions remain, compress oldest PARADIGM to 3-5 lines (never less)
 6. Update Health Metrics line count
@@ -64,8 +64,8 @@ When MEMORY.md ≥180 lines:
 - File Map
 
 **Content overflow (any section, any file):**
-- When a MEMORY.md section exceeds ~20 lines: create a dedicated L2 file (e.g., `memory/architecture.md`), add to File Map, replace section with 1-line pointer.
-- When an L2 file exceeds 300 lines: archive oldest content to git only (L3). Recoverable via `git log -p -- memory/[file]`.
+- When a MEMORY.md section exceeds ~20 lines: create a dedicated L2 file (e.g., `.longmem/memory/architecture.md`), add to File Map, replace section with 1-line pointer.
+- When an L2 file exceeds 300 lines: archive oldest content to git only (L3). Recoverable via `git log -p -- .longmem/memory/[file]`.
 - Pattern is always: move content → leave pointer → update File Map.
 
 ---
@@ -85,13 +85,13 @@ When MEMORY.md ≥180 lines:
    - **ROUTINE:** Incremental progress, expected execution, no significant decisions
    - **If unsure, default PARADIGM** — cost of keeping a 5-line block is negligible
 5. **Update Health Metrics:**
-   - Line count (use `wc -l memory/MEMORY.md`)
+   - Line count (use `wc -l .longmem/memory/MEMORY.md`)
    - PTL item count
    - Corrections count
    - Broken file refs (should be 0)
    - Oldest unarchived ROUTINE session
 6. **Run integrity checks** (Section 7)
-7. **Commit memory files:** run `scripts/memory-sync.sh`
+7. **Commit memory files:** run `.longmem/scripts/memory-sync.sh`
 
 **Do not skip session end protocol.** This is the L3 recovery mechanism.
 
@@ -101,7 +101,7 @@ When MEMORY.md ≥180 lines:
 
 **When user corrects you:**
 1. Acknowledge immediately
-2. Add to `corrections.md` with format:
+2. Add to `.longmem/memory/corrections.md` with format:
    ```
    ### Correction #N: [Short name]
    [What you get wrong] → [What to write instead]
@@ -125,7 +125,7 @@ When MEMORY.md ≥180 lines:
 
 ## 6. PTL Maintenance
 
-**Canonical file:** `ptl.yaml`. Commands and schema defined in CLAUDE.md.
+**Canonical file:** `.longmem/memory/ptl.yaml`. Commands and schema defined in directives.md.
 
 **Decay rules:**
 - Tier 1: No auto-decay. Untouched >1 week → flag to user
@@ -144,7 +144,7 @@ Run at session end. **Do not silently fix — flag anomalies to user.**
 1. **File references:** All paths in MEMORY.md file map must resolve
 2. **Corrections count:** Health Metrics corrections count must match `wc -l corrections.md`
 3. **L1-L2 sync:** L1 corrections in MEMORY.md must match their counterparts in corrections.md (text can differ for brevity, but core meaning must align)
-4. **Orphan files:** Files in memory/ not referenced in MEMORY.md file map
+4. **Orphan files:** Files in .longmem/memory/ not referenced in MEMORY.md file map
 5. **Broken links:** Any markdown links in MEMORY.md that point to non-existent files
 6. **File Map currency:** Update when files added/removed. Keep descriptions to one line.
 

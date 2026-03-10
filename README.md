@@ -24,14 +24,16 @@ The system evolved under pressure over 36 sessions across 16 weeks while co-auth
 
 ### Stage 1: Start Here (5 minutes)
 
-1. **Clone or use the template**
+**New project:**
 ```bash
 git clone https://github.com/energyscholar/longmem.git my-project-memory
 cd my-project-memory
 ```
 Or use GitHub's "Use this template" button.
 
-2. **Edit `memory/MEMORY.md`** — fill in your project name, goal, key people
+**Existing project:** Paste the install prompt from [`install.md`](install.md) into Claude Code. It clones longmem, copies `.longmem/` into your project, and appends the activation block to your CLAUDE.md.
+
+2. **Edit `.longmem/memory/MEMORY.md`** — fill in your project name, goal, key people
 3. **Run `claude`** from the project directory
 4. **That's it.** Claude reads MEMORY.md and starts building context.
 
@@ -43,7 +45,7 @@ Or use GitHub's "Use this template" button.
 ### Stage 3: After ~10 Sessions
 
 - MEMORY.md approaches 200 lines. Claude reads `protocol.md` and compresses automatically.
-- Session-end sync (`scripts/memory-sync.sh`) creates git snapshots for recovery.
+- Session-end sync (`.longmem/scripts/memory-sync.sh`) creates git snapshots for recovery.
 - At this point, all files are active. You didn't have to learn them all on Day 1.
 
 ---
@@ -54,27 +56,31 @@ Or use GitHub's "Use this template" button.
 
 ```
 longmem/
-├── README.md                    # This file
-├── CLAUDE.md                    # Drop-in Claude Code directives
-├── CONTRIBUTING.md              # Contribution guidelines
-├── feedback.md                  # Friction log for user feedback
-├── memory/
-│   ├── MEMORY.md                # L1 cache (~200 lines, always loaded)
-│   ├── protocol.md              # Session lifecycle rules
-│   ├── corrections.md           # Error tracking (starts empty)
-│   ├── ptl.yaml                 # Prioritized task list (starts empty)
-│   ├── decisions.md             # Decision log (starts empty)
-│   ├── people.md                # Key contacts in tiers
-│   └── session-details.md       # Full session history (starts empty)
-├── scripts/
-│   └── memory-sync.sh           # Git sync for L3 recovery
-├── docs/
-│   ├── architecture.md          # Three-tier cache model explained
-│   └── case-study.md            # 36 sessions, 128 commits, zero context losses
+├── README.md                        # This file
+├── CLAUDE.md                        # Activation block (points to directives)
+├── CONTRIBUTING.md                  # Contribution guidelines
+├── feedback.md                      # Friction log for user feedback
+├── install.md                       # Install prompt for existing projects
+├── uninstall.md                     # Uninstall prompt
+├── .longmem/                        # Everything that gets installed
+│   ├── directives.md                # Full Claude Code directives
+│   ├── memory/
+│   │   ├── MEMORY.md                # L1 cache (~200 lines, always loaded)
+│   │   ├── protocol.md              # Session lifecycle rules
+│   │   ├── corrections.md           # Error tracking (starts empty)
+│   │   ├── ptl.yaml                 # Prioritized task list (starts empty)
+│   │   ├── decisions.md             # Decision log (starts empty)
+│   │   ├── people.md                # Key contacts in tiers
+│   │   └── session-details.md       # Full session history (starts empty)
+│   ├── scripts/
+│   │   └── memory-sync.sh           # Git sync for L3 recovery
+│   └── docs/
+│       ├── architecture.md          # Three-tier cache model explained
+│       └── case-study.md            # 36 sessions, 128 commits, zero context losses
 ├── .github/
-│   └── ISSUE_TEMPLATE/          # Bug report and setup help templates
-├── LICENSE                      # MIT
-└── .gitignore                   # Minimal: only OS/editor junk
+│   └── ISSUE_TEMPLATE/              # Bug report and setup help templates
+├── LICENSE                          # MIT
+└── .gitignore                       # Minimal: only OS/editor junk
 ```
 
 ---
@@ -84,14 +90,28 @@ longmem/
 **Three-tier cache model:**
 
 - **L1** (`MEMORY.md`): Always in context. Capped at 200 lines. Contains identity, current state, the five most critical corrections, active session summaries, and health metrics.
-- **L2** (other files in `memory/`): Loaded on demand when depth is needed. Full reference material.
+- **L2** (other files in `.longmem/memory/`): Loaded on demand when depth is needed. Full reference material.
 - **L3** (git history): Recovery mechanism. A session-end sync script commits everything to git, creating versioned snapshots. When context compresses or sessions crash, git is the backstop.
 
 **The corrections system** is the most valuable component. You maintain a list of things the AI consistently gets wrong about your project. Each correction is a short imperative: what not to write, what to write instead. The five most-violated rotate into L1 where they're visible every session. Before corrections: same mistakes every session. After: repeat violations near zero.
 
 **Self-maintenance:** The AI manages its own memory. At session end it updates state, writes a session summary, compresses older sessions to stay under the line cap, runs integrity checks, and commits to git. The system maintains itself.
 
-For full technical detail, see [`docs/architecture.md`](docs/architecture.md).
+For full technical detail, see [`.longmem/docs/architecture.md`](.longmem/docs/architecture.md).
+
+### How It Works — Quick Reference
+
+If Claude loses context or you need a fast orientation:
+
+- **Memory lives in:** `.longmem/memory/`
+- **Read first:** `.longmem/directives.md` → `.longmem/memory/MEMORY.md`
+- **Recover from context loss:** Read `.longmem/directives.md`, then `.longmem/memory/MEMORY.md`, then continue
+- **Sync to git:** `.longmem/scripts/memory-sync.sh`
+- **Key files:**
+  - `MEMORY.md` — L1 cache, identity, state, health metrics (200-line cap)
+  - `corrections.md` — Recurring errors the AI must avoid
+  - `protocol.md` — Session lifecycle rules (compression, integrity checks)
+  - `ptl.yaml` — Prioritized task list (stable IDs, five tiers)
 
 ---
 
@@ -146,31 +166,35 @@ Results from 36 sessions over 16 weeks (128 commits):
 - **Zero catastrophic context losses** (after system established)
 - **Context re-explanation: 30% → <5%**
 
-See [`docs/case-study.md`](docs/case-study.md) for details.
+See [`.longmem/docs/case-study.md`](.longmem/docs/case-study.md) for details.
 
 ---
 
 ### Why is there no setup script?
 
-There is no `setup.sh`. That's intentional. The entire setup is: edit one file (`memory/MEMORY.md`), then run `claude`. Zero dependencies, zero installation, zero configuration. If setup takes more than 5 minutes, something is wrong — [open an issue](https://github.com/energyscholar/longmem/issues/new?template=setup_help.md).
+There is no `setup.sh`. That's intentional. The entire setup is: edit one file (`.longmem/memory/MEMORY.md`), then run `claude`. For existing projects, paste the install prompt from [`install.md`](install.md) — Claude does the rest. Zero dependencies, zero configuration. If setup takes more than 5 minutes, something is wrong — [open an issue](https://github.com/energyscholar/longmem/issues/new?template=setup_help.md).
+
+### Uninstall
+
+Paste the prompt from [`uninstall.md`](uninstall.md) into Claude Code. It creates a final git snapshot, removes `.longmem/`, and cleans up CLAUDE.md. Memory history is preserved in git and recoverable via `git log --all -- .longmem/`.
 
 ---
 
 ## Troubleshooting
 
 **Claude doesn't load MEMORY.md**
-- Verify `CLAUDE.md` is in the project root (not a subdirectory)
+- Verify `CLAUDE.md` is in the project root (not a subdirectory) and contains the LONGMEM START activation block
 - Restart Claude Code (`claude` from the project directory)
-- Check that `memory/MEMORY.md` exists and is not empty
+- Check that `.longmem/memory/MEMORY.md` exists and is not empty
 
 **memory-sync.sh fails**
 - Run `git init` if this is a new project (script requires a git repo)
 - On macOS: ensure bash is available (`bash --version`)
-- Check file permissions: `chmod +x scripts/memory-sync.sh`
+- Check file permissions: `chmod +x .longmem/scripts/memory-sync.sh`
 
 **PTL commands not recognized**
-- Claude needs to read `CLAUDE.md` first — start the session from the project root
-- Try: "Read CLAUDE.md and then show me the PTL"
+- Claude needs to read `.longmem/directives.md` first — start the session from the project root
+- Try: "Read `.longmem/directives.md` and then show me the PTL"
 
 **MEMORY.md getting too long**
 - Normal: the AI should compress automatically at 180 lines

@@ -15,7 +15,7 @@
 
 ## L1: Always In Context
 
-**File:** `memory/MEMORY.md`
+**File:** `.longmem/memory/MEMORY.md`
 **Hard cap:** 200 lines
 **Enforcement threshold:** 180 lines (triggers compression)
 
@@ -76,13 +76,13 @@ Separation serves multiple purposes:
 
 ## L3: Git Recovery
 
-**Mechanism:** `scripts/memory-sync.sh`
+**Mechanism:** `.longmem/scripts/memory-sync.sh`
 
 At session end, all memory files are committed to git:
 ```bash
 #!/bin/bash
 set -e
-REPO="$(cd "$(dirname "$0")/.." && pwd)"
+REPO="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$REPO"
 
 if [ ! -d .git ]; then
@@ -90,7 +90,7 @@ if [ ! -d .git ]; then
     exit 1
 fi
 
-git add memory/ CLAUDE.md
+git add .longmem/
 
 if git diff --cached --quiet; then
     echo "Memory sync: no changes to commit."
@@ -169,7 +169,7 @@ The AI maintains its own memory. No human intervention required (except fixing b
 3. If MEMORY.md >180 lines: compress oldest ROUTINE session
 4. Run integrity checks (file refs, correction count, L1-L2 sync, orphans)
 5. Update health metrics dashboard
-6. Run `scripts/memory-sync.sh` to commit to git
+6. Run `.longmem/scripts/memory-sync.sh` to commit to git
 
 **Compression rules:**
 - MEMORY.md keeps 2-3 active sessions
@@ -188,7 +188,7 @@ The AI maintains its own memory. No human intervention required (except fixing b
 - All file paths in MEMORY.md resolve
 - Corrections count in health metrics matches `wc -l corrections.md`
 - L1 corrections match their L2 counterparts (meaning, not necessarily text)
-- No orphan files (files in memory/ not referenced in file map)
+- No orphan files (files in .longmem/memory/ not referenced in file map)
 - No broken markdown links
 
 **Health metrics tracked:**
@@ -203,7 +203,7 @@ The AI maintains its own memory. No human intervention required (except fixing b
 
 ## PTL (Prioritized Task List)
 
-**File:** `memory/ptl.yaml`
+**File:** `.longmem/memory/ptl.yaml`
 **Format:** YAML (machine-readable, git-friendly)
 
 **Schema:**

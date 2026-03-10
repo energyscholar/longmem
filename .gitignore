@@ -10,3 +10,6 @@ Thumbs.db
 .idea/
 
 # Do NOT ignore .md files — they are the product
+
+# Ensure .longmem/ is not excluded by any .* pattern
+!.longmem/

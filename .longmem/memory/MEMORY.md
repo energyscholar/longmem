@@ -53,12 +53,12 @@
 
 <!-- Paths to L2 files. One-line descriptions. Update when files are added/removed. -->
 
-- `memory/corrections.md` — Recurring errors and how to avoid them (full list)
-- `memory/protocol.md` — Session lifecycle rules (read when triggers fire)
-- `memory/ptl.yaml` — Prioritized Task List (YAML, stable IDs)
-- `memory/decisions.md` — Structural decisions with rationale
-- `memory/session-details.md` — Full session history (compression target)
-- `memory/people.md` — Key contacts in tiers (optional)
+- `.longmem/memory/corrections.md` — Recurring errors and how to avoid them (full list)
+- `.longmem/memory/protocol.md` — Session lifecycle rules (read when triggers fire)
+- `.longmem/memory/ptl.yaml` — Prioritized Task List (YAML, stable IDs)
+- `.longmem/memory/decisions.md` — Structural decisions with rationale
+- `.longmem/memory/session-details.md` — Full session history (compression target)
+- `.longmem/memory/people.md` — Key contacts in tiers (optional)
 
 ---
 
