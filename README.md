@@ -20,47 +20,37 @@ The system evolved under pressure over 36 sessions across 16 weeks while co-auth
 
 ---
 
-## Quickstart (5 Minutes)
+## Quickstart
 
-**1. Clone or download this repository**
+### Stage 1: Start Here (5 minutes)
+
+1. **Clone or use the template**
 ```bash
 git clone https://github.com/energyscholar/longmem.git my-project-memory
 cd my-project-memory
 ```
-
 Or use GitHub's "Use this template" button.
 
-**2. Customize for your project**
+2. **Edit `memory/MEMORY.md`** — fill in your project name, goal, key people
+3. **Run `claude`** from the project directory
+4. **That's it.** Claude reads MEMORY.md and starts building context.
 
-Edit `memory/MEMORY.md`:
-- Replace `[YOUR PROJECT]` placeholders with your project name
-- Set your project goal
-- Update key metrics
+### Stage 2: After ~5 Sessions
 
-The `CLAUDE.md` file at the repository root is automatically loaded by Claude Code when you start a session in this directory.
+- Claude will start making mistakes about your project. When it does, say: "Add a correction: [what's wrong] → [what's right]." Claude adds it to `corrections.md` and checks it every session.
+- If you're tracking tasks, say "PTL add: [task]." Claude manages `ptl.yaml`.
 
-**3. Start a Claude Code session**
+### Stage 3: After ~10 Sessions
 
-```bash
-claude
-```
-
-Claude will read `CLAUDE.md`, discover the memory files, and begin maintaining them. The value becomes obvious within 2-3 sessions.
-
-**4. Work normally**
-
-At session end, Claude will:
-- Update current state
-- Write session summary
-- Compress if needed
-- Run integrity checks
-- Commit to git via `scripts/memory-sync.sh`
-
-You don't manage the memory — the AI does.
+- MEMORY.md approaches 200 lines. Claude reads `protocol.md` and compresses automatically.
+- Session-end sync (`scripts/memory-sync.sh`) creates git snapshots for recovery.
+- At this point, all files are active. You didn't have to learn them all on Day 1.
 
 ---
 
-## File Structure
+## Deep Dive
+
+### File Structure
 
 ```
 longmem/
@@ -153,6 +143,12 @@ Results from 36 sessions over 16 weeks (128 commits):
 - **Context re-explanation: 30% → <5%**
 
 See [`docs/case-study.md`](docs/case-study.md) for details.
+
+---
+
+### Why is there no setup script?
+
+There is no `setup.sh`. That's intentional. The entire setup is: edit one file (`memory/MEMORY.md`), then run `claude`. Zero dependencies, zero installation, zero configuration. If setup takes more than 5 minutes, something is wrong — [open an issue](https://github.com/energyscholar/longmem/issues/new?template=setup_help.md).
 
 ---
 

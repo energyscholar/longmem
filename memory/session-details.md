@@ -1,5 +1,7 @@
 # Session Details
 
+> **Optional.** This file fills automatically when MEMORY.md compresses old sessions. You don't need to touch it until compression happens (~session 10+).
+
 *Full session history. MEMORY.md keeps the 2-3 most recent. Older sessions archived here.*
 
 ---

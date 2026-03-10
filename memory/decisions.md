@@ -1,5 +1,7 @@
 # Structural Decisions
 
+> **Optional.** Activate when you need to track structural decisions. Most projects start needing this around session 5-10.
+
 *Key decisions with rationale. Prevents re-litigating settled questions.*
 
 ---

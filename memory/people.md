@@ -1,5 +1,7 @@
 # Key People
 
+> **Optional.** Activate when your project involves multiple people whose roles and context matter. Solo projects may never need this file.
+
 *Not just project collaborators — anyone the AI needs context about: team members, stakeholders, family, mentors, colleagues. Prevents "who's that?" every session.*
 
 ---

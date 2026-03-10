@@ -16,11 +16,16 @@ You have a persistent memory directory at `memory/`. Its contents persist across
 
 ### Session Start Protocol
 
-1. Read `memory/MEMORY.md` (auto-loaded by Claude Code)
-2. Check health metrics dashboard in MEMORY.md
-3. If any health metric is out of bounds, read `memory/protocol.md` for maintenance rules
-4. Read `memory/corrections.md` to load all corrections (not just the hot five)
-5. If working on tasks, check `memory/ptl.yaml` for current priorities
+**Always:**
+1. Read MEMORY.md (auto-loaded with this file)
+2. Read corrections.md — check every correction
+
+**After 5+ sessions (when files are populated):**
+3. Check health metrics in MEMORY.md
+4. If MEMORY.md >180 lines: read protocol.md Section 3, compress before proceeding
+5. Scan ptl.yaml for ACTIVE and BLOCKED items
+
+**On early sessions (files mostly empty):** Steps 3-5 are no-ops. Just read MEMORY.md and corrections.md, then start working.
 
 ### Session End Protocol
 
