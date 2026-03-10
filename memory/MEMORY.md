@@ -79,3 +79,4 @@ Initial setup. Cloned longmem template, customized MEMORY.md, started first sess
 ---
 
 **End of MEMORY.md template. Customize the sections above for your project. The system will adapt over 2-3 sessions.**
+
