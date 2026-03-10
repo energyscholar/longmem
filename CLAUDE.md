@@ -104,4 +104,4 @@ Commands that override defaults:
 
 ---
 
-**This is a template.** Customize MEMORY.md, corrections.md, and ptl.yaml for your project. The memory system will adapt to your workflow over 2-3 sessions.
+**This is a template.** Customize MEMORY.md, corrections.md, ptl.yaml, and people.md (optional) for your project. The memory system will adapt to your workflow over 2-3 sessions.

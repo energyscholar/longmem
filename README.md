@@ -24,7 +24,7 @@ The system evolved under pressure over 33 sessions while co-authoring a 224-page
 
 **1. Clone or download this repository**
 ```bash
-git clone https://github.com/your-username/longmem.git my-project-memory
+git clone https://github.com/energyscholar/longmem.git my-project-memory
 cd my-project-memory
 ```
 

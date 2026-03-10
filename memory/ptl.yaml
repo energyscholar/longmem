@@ -11,3 +11,18 @@ meta:
   statuses: [READY, ACTIVE, BLOCKED, REVIEW, NEEDS_PLAN, TODO, DONE, DROPPED]
 
 items: []
+
+# Example item (uncomment and customize):
+#
+#  - id: PTL-001
+#    title: "Fix authentication bug on refresh token"
+#    tier: 1
+#    status: ACTIVE
+#    owner: claude
+#    blocked_by: null
+#    detail: null
+#    source: "Session 3"
+#    created: 2026-03-09
+#    touched: 2026-03-09
+#    decay_exempt: false
+#    note: "Login fails with 401 after token expires. Reproduce: wait 30min, click any link."
