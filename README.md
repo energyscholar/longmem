@@ -56,6 +56,8 @@ Or use GitHub's "Use this template" button.
 longmem/
 ├── README.md                    # This file
 ├── CLAUDE.md                    # Drop-in Claude Code directives
+├── CONTRIBUTING.md              # Contribution guidelines
+├── feedback.md                  # Friction log for user feedback
 ├── memory/
 │   ├── MEMORY.md                # L1 cache (~200 lines, always loaded)
 │   ├── protocol.md              # Session lifecycle rules
@@ -69,6 +71,8 @@ longmem/
 ├── docs/
 │   ├── architecture.md          # Three-tier cache model explained
 │   └── case-study.md            # 36 sessions, 128 commits, zero context losses
+├── .github/
+│   └── ISSUE_TEMPLATE/          # Bug report and setup help templates
 ├── LICENSE                      # MIT
 └── .gitignore                   # Minimal: only OS/editor junk
 ```
