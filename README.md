@@ -80,6 +80,12 @@ longmem/
 │       └── case-study.md            # 36 sessions, 128 commits, zero context losses
 ├── .github/
 │   └── ISSUE_TEMPLATE/              # Bug report and setup help templates
+├── tests/
+│   ├── run-all.sh                   # Test runner
+│   ├── test-integrity.sh            # Cross-reference and consistency checks
+│   ├── test-hashes.sh               # Template drift detection
+│   ├── test-smoke.sh                # Activation and sync verification
+│   └── README.md                    # Test documentation
 ├── LICENSE                          # MIT
 └── .gitignore                       # Minimal: only OS/editor junk
 ```

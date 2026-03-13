@@ -24,6 +24,16 @@ longmem is deliberately minimal. Every file and rule traces back to a specific, 
 2. **Larger changes**: Open an issue first to discuss rationale and design
 3. **New memory files**: Must fit the three-tier cache model (see `.longmem/docs/architecture.md`)
 
+## Running tests
+
+Before submitting a PR, run the test suite:
+
+```bash
+bash tests/run-all.sh
+```
+
+All tests must pass. If you've intentionally changed template files, run `bash tests/test-hashes.sh --reset` to update the baseline.
+
 ## Design principles
 
 - **Zero dependencies**: Markdown + YAML + bash + git. Nothing else.
