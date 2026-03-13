@@ -64,7 +64,7 @@ When the user says:
 - **"PTL add: [thread topic]"** — Promote a thread to an explicit PTL item
 - **"no tracking"** — Disable open threads (remove the section from MEMORY.md)
 
-Open threads are extracted at session end from topics mentioned as incomplete or deferred. They appear when mentioned in 2+ sessions and decay after 3 sessions without mention. Max 5 active threads.
+Open threads are extracted at session end from topics mentioned as incomplete or deferred. They appear when mentioned in 3+ of the last 5 sessions and decay after 3 sessions without mention. Max 5 active threads.
 
 ### Three-Tier Cache Model
 
@@ -104,7 +104,6 @@ You maintain your own memory. Triggers:
 Track in MEMORY.md:
 - MEMORY.md line count (target: <180)
 - PTL item count (target: <60)
-- PTL item count
 - Oldest unarchived ROUTINE session (target: <3 weeks)
 - Broken file references (target: 0)
 - Sessions since last system review (every 10 sessions, ask user "anything missing from my context?")

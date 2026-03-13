@@ -51,11 +51,9 @@ items:
       - Planning Discipline: Plan → red-team → iterate → implement → verify.
         Even simple tasks benefit from "what does done look like?" before starting.
         See .longmem/docs/patterns.md for the full pattern set.
-      - Triad (Auditor/Generator role discipline): Auditor plans, Generator
-        executes. Separation prevents scope creep and confabulation. Most valuable
-        when specs are ambiguous or project exceeds 10 sessions.
-      - Dignity Net (governance): Relational health monitoring. Detects
-        divergence between stated goals and observable actions. Optional.
+      - Role Separation: Plan in one session, implement in another. Separation
+        prevents scope creep and confabulation. Most valuable when specs are
+        ambiguous or project exceeds 10 sessions. See patterns.md Pattern 3.
 
       Type "PTL done: PTL-000" to archive this item when ready.
 

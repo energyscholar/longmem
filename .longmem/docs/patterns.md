@@ -38,11 +38,11 @@ Iterate until remaining issues are LOW severity. Don't ship with HIGH or MEDIUM 
 
 ---
 
-## Pattern 3: Separate Planning from Implementation
+## Pattern 3: Separate Planning from Implementation (Role Separation)
 
 **Failure:** When the same session plans and implements, scope creep is universal. The planner adds features mid-implementation. The implementer second-guesses the plan. Confabulation risk rises because there's no external check.
 
-**Pattern (Triad):** The entity that plans should not implement.
+**Pattern:** The entity that plans should not implement.
 - **Auditor role:** Defines objectives, writes acceptance criteria, reviews output
 - **Generator role:** Reads the plan, implements exactly what's specified, reports completion
 
@@ -69,7 +69,7 @@ Examples:
 
 ---
 
-## Pattern 5: Inform, Don't Optimize (DN Level 0)
+## Pattern 5: Inform, Don't Optimize
 
 **Failure:** An adaptive compression threshold was designed that automatically tightened based on correction frequency. Analysis revealed a positive feedback loop: more compression triggered more corrections, which tightened the threshold further. The feature was killed before shipping.
 
