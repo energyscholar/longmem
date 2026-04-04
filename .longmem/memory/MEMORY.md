@@ -41,9 +41,12 @@
      PARADIGM = major decision, breakthrough, or new direction.
      ROUTINE = incremental progress, expected execution.
      Default PARADIGM if unsure.
+     Include register, themes, reconstruction-priority, and handoff note.
 
 ### Session 1 (ROUTINE, YYYY-MM-DD)
+`register: technical` `themes: [setup]` `reconstruction-priority: 1`
 [What you worked on. 2-3 sentences.]
+**Handoff:** [2-3 sentences for next instance: what was alive, what to load first.]
 
 -->
 
@@ -69,6 +72,7 @@
 - `.longmem/memory/decisions.md` — Structural decisions with rationale
 - `.longmem/memory/session-details.md` — Full session history (compression target)
 - `.longmem/memory/people.md` — Key contacts in tiers (optional)
+- `.longmem/memory/breakthroughs.md` — Reasoning chains that shifted understanding (cap 15 + 5 killed)
 - `.longmem/docs/patterns.md` — Methodology patterns (planning, red-team, role separation)
 
 ---

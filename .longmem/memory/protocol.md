@@ -61,6 +61,9 @@ When MEMORY.md ≥180 lines: 1) Archive oldest ROUTINE session to session-detail
    - Significance flag: PARADIGM or ROUTINE
    - 3-5 line summary
 4. **Classify:** PARADIGM (new insight, direction change, milestone) or ROUTINE (incremental). Default PARADIGM if unsure.
+4b. **Register + priority:** Assign `register:` (`deep`, `creative`, `operational`, `technical`, `routine`, `emotional`, `mixed`), optional `themes:` tags, and `reconstruction-priority:` (1=routine, 2=notable, 3=critical). Helps next instance calibrate tone and loading order.
+4c. **Handoff note** (2-3 sentences): what was alive, what user cares about, what to load first. Written for the next instance, not as a summary of what happened.
+4d. **Breakthroughs:** If any reasoning chain shifted understanding, add to `.longmem/memory/breakthroughs.md` (cap 15 active + 5 killed).
 5. **Update Health Metrics:** line count, PTL count, corrections count, broken refs, oldest ROUTINE, health vector (Section 9)
 6. **Run integrity checks** (Section 7)
 7. **Commit memory files:** run `.longmem/scripts/memory-sync.sh`

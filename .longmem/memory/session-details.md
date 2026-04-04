@@ -20,7 +20,9 @@ Sessions get a significance flag:
 
 ```markdown
 ### Session N (PARADIGM | ROUTINE, YYYY-MM-DD)
+`register: deep` `themes: [topic1, topic2]` `reconstruction-priority: 3`
 [3-5 line summary for PARADIGM, 2-3 lines for ROUTINE after compression]
+**Handoff:** [2-3 sentences for next instance: what was alive, what to load first]
 ```
 
 ---
